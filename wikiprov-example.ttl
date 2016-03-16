@@ -1,86 +1,303 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix wikiprov: <http://purl.org/net/wikiprov#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix evident: <http://purl.org/net/evident#> .
+@prefix wikiprov: <http://purl.org/net/wikiprov#> .
 
-wikiprov:United_States_National_Forest_223449
-    wikiprov:id "223449"^^xsd:string ;
-    wikiprov:pageid "42653"^^xsd:string ;
-    wikiprov:revid "223449"^^xsd:string ;
-    wikiprov:title "United_States_National_Forest"^^xsd:string ;
-    a prov:Entity, wikiprov:article .
+_:genid2068948227 a owl:Ontology .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/evident#normalInfluenceFactor
 
-wikiprov:559734generation
-    wikiprov:activity "comment559734"^^xsd:string ;
-    wikiprov:comment ""^^xsd:string ;
-    wikiprov:entity "559734"^^xsd:string ;
-    wikiprov:id "559734generation"^^xsd:string ;
-    wikiprov:relationshipName "559734generation"^^xsd:string ;
-    wikiprov:time "2002-09-17T03:11:31Z"^^xsd:string ;
-    a prov:Generation ;
-    prov:activity wikiprov:activity_559734 ;
-    prov:atTime "2002-09-17T03:11:31Z"^^xsd:dateTime .
+evident:normalInfluenceFactor a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#activity
 
-wikiprov:Mav
-    wikiprov:id "Mav"^^xsd:string ;
-    wikiprov:user_name "Mav"^^xsd:string ;
-    a wikiprov:editor, prov:Agent .
+wikiprov:activity a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#agent
 
-wikiprov:Mav_559734
-    a prov:Attribution ;
-    prov:agent wikiprov:Mav ;
-    evident:normalInfluenceFactor "0.012578616352201255"^^xsd:double .
+wikiprov:agent a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#changed
 
-wikiprov:United_States_National_Forest_559734
-    wikiprov:comment ""^^xsd:string ;
-    wikiprov:id "559734"^^xsd:string ;
-    wikiprov:pageid "42653"^^xsd:string ;
-    wikiprov:parentid "223449"^^xsd:string ;
-    wikiprov:revid "559734"^^xsd:string ;
-    wikiprov:size "1116"^^xsd:string ;
-    wikiprov:time "2002-09-17T03:11:31Z"^^xsd:string ;
-    wikiprov:title "United_States_National_Forest"^^xsd:string ;
-    a wikiprov:article, prov:Entity ;
-    prov:qualifiedAttribution wikiprov:Mav_559734 ;
-    prov:qualifiedGeneration wikiprov:559734generation ;
-    prov:qualifiedRevision wikiprov:United_States_National_Forest_559734_223449 .
+wikiprov:changed a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#comment
 
-wikiprov:United_States_National_Forest_559734_223449
-    wikiprov:agent "Mav"^^xsd:string ;
-    wikiprov:changed 2 ;
-    wikiprov:common 157 ;
-    wikiprov:deleted 0 ;
-    wikiprov:entity1 "223449"^^xsd:string ;
-    wikiprov:entity2 "559734"^^xsd:string ;
-    wikiprov:id "United_States_National_Forest_559734_223449"^^xsd:string ;
-    wikiprov:parentid "223449"^^xsd:string ;
-    wikiprov:relationshipName "United_States_National_Forest_559734_223449"^^xsd:string ;
-    wikiprov:revid "559734"^^xsd:string ;
-    wikiprov:words 159 ;
-    a prov:Revision ;
-    prov:entity wikiprov:United_States_National_Forest_223449 ;
-    prov:hadActivity wikiprov:activity_559734 ;
-    prov:hadGeneration wikiprov:559734generation ;
-    evident:normalInfluenceFactor "0.9874213836477987"^^xsd:double .
+wikiprov:comment a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#common
 
-wikiprov:activity_559734
-    wikiprov:comment ""^^xsd:string ;
-    wikiprov:endtime "2002-09-17T03:11:31Z"^^xsd:string ;
-    wikiprov:id "comment559734"^^xsd:string ;
-    wikiprov:revid "559734"^^xsd:string ;
-    wikiprov:starttime "null"^^xsd:string ;
-    a prov:Activity, "edit"^^xsd:string ;
-    prov:endedAtTime "2002-09-17T03:11:31Z"^^xsd:dateTime ;
-    prov:qualifiedAssociation wikiprov:comment559734Mav .
+wikiprov:common a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#deleted
 
-wikiprov:comment559734Mav
-    wikiprov:activity "comment559734"^^xsd:string ;
-    wikiprov:agent "Mav"^^xsd:string ;
-    wikiprov:id "comment559734Mav"^^xsd:string ;
-    wikiprov:publicationpolicy "null"^^xsd:string ;
-    wikiprov:relationshipName "comment559734Mav"^^xsd:string ;
-    wikiprov:user_name "Mav"^^xsd:string ;
-    a prov:Association ;
-    prov:agent wikiprov:Mav .
+wikiprov:deleted a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#endtime
+
+wikiprov:endtime a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#entity
+
+wikiprov:entity a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#entity1
+
+wikiprov:entity1 a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#entity2
+
+wikiprov:entity2 a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#id
+
+wikiprov:id a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#pageid
+
+wikiprov:pageid a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#parentid
+
+wikiprov:parentid a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#publicationpolicy
+
+wikiprov:publicationpolicy a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#relationshipName
+
+wikiprov:relationshipName a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#revid
+
+wikiprov:revid a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#size
+
+wikiprov:size a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#starttime
+
+wikiprov:starttime a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#time
+
+wikiprov:time a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#title
+
+wikiprov:title a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#user_name
+
+wikiprov:user_name a owl:AnnotationProperty .
+# 
+# http://purl.org/net/wikiprov#words
+
+wikiprov:words a owl:AnnotationProperty .
+# 
+# http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+
+rdf:type a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#activity
+
+prov:activity a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#agent
+
+prov:agent a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#atTime
+
+prov:atTime a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#endedAtTime
+
+prov:endedAtTime a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#entity
+
+prov:entity a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#hadActivity
+
+prov:hadActivity a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#hadGeneration
+
+prov:hadGeneration a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#qualifiedAssociation
+
+prov:qualifiedAssociation a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#qualifiedAttribution
+
+prov:qualifiedAttribution a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#qualifiedGeneration
+
+prov:qualifiedGeneration a owl:AnnotationProperty .
+# 
+# http://www.w3.org/ns/prov#qualifiedRevision
+
+prov:qualifiedRevision a owl:AnnotationProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/wikiprov#article
+
+wikiprov:article a owl:Class .
+# 
+# http://purl.org/net/wikiprov#editor
+
+wikiprov:editor a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Activity
+
+prov:Activity a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Agent
+
+prov:Agent a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Association
+
+prov:Association a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Attribution
+
+prov:Attribution a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Entity
+
+prov:Entity a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Generation
+
+prov:Generation a owl:Class .
+# 
+# http://www.w3.org/ns/prov#Revision
+
+prov:Revision a owl:Class .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/wikiprov#Mav
+
+wikiprov:Mav a owl:NamedIndividual , wikiprov:editor , prov:Agent ;
+	wikiprov:id "Mav"^^xsd:string ;
+	wikiprov:user_name "Mav"^^xsd:string .
+# 
+# http://purl.org/net/wikiprov#Mav_559734
+
+wikiprov:Mav_559734 a owl:NamedIndividual , prov:Attribution ;
+	evident:normalInfluenceFactor "0.012578616352201255"^^xsd:double ;
+	prov:agent wikiprov:Mav .
+# 
+# http://purl.org/net/wikiprov#United_States_National_Forest_223449
+
+wikiprov:United_States_National_Forest_223449 a owl:NamedIndividual , wikiprov:article , prov:Entity ;
+	wikiprov:id "223449"^^xsd:string ;
+	wikiprov:pageid "42653"^^xsd:string ;
+	wikiprov:revid "223449"^^xsd:string ;
+	wikiprov:title "United_States_National_Forest"^^xsd:string .
+# 
+# http://purl.org/net/wikiprov#United_States_National_Forest_559734
+
+wikiprov:United_States_National_Forest_559734 a owl:NamedIndividual , wikiprov:article , prov:Entity ;
+	wikiprov:comment ""^^xsd:string ;
+	wikiprov:id "559734"^^xsd:string ;
+	wikiprov:pageid "42653"^^xsd:string ;
+	wikiprov:parentid "223449"^^xsd:string ;
+	wikiprov:revid "559734"^^xsd:string ;
+	wikiprov:size "1116"^^xsd:string ;
+	wikiprov:time "2002-09-17T03:11:31Z"^^xsd:string ;
+	wikiprov:title "United_States_National_Forest"^^xsd:string ;
+	prov:qualifiedAttribution wikiprov:Mav_559734 ;
+	prov:qualifiedGeneration wikiprov:559734generation ;
+	prov:qualifiedRevision wikiprov:United_States_National_Forest_559734_223449 .
+# 
+# http://purl.org/net/wikiprov#United_States_National_Forest_559734_223449
+
+wikiprov:United_States_National_Forest_559734_223449 a owl:NamedIndividual , prov:Revision ;
+	evident:normalInfluenceFactor "0.9874213836477987"^^xsd:double ;
+	wikiprov:agent "Mav"^^xsd:string ;
+	wikiprov:changed "2"^^xsd:integer ;
+	wikiprov:common "157"^^xsd:integer ;
+	wikiprov:deleted "0"^^xsd:integer ;
+	wikiprov:entity1 "223449"^^xsd:string ;
+	wikiprov:entity2 "559734"^^xsd:string ;
+	wikiprov:id "United_States_National_Forest_559734_223449"^^xsd:string ;
+	wikiprov:parentid "223449"^^xsd:string ;
+	wikiprov:relationshipName "United_States_National_Forest_559734_223449"^^xsd:string ;
+	wikiprov:revid "559734"^^xsd:string ;
+	wikiprov:words "159"^^xsd:integer ;
+	prov:entity wikiprov:United_States_National_Forest_223449 ;
+	prov:hadActivity wikiprov:activity_559734 ;
+	prov:hadGeneration wikiprov:559734generation .
+# 
+# http://purl.org/net/wikiprov#activity_559734
+
+wikiprov:activity_559734 a owl:NamedIndividual , prov:Activity ;
+	wikiprov:comment ""^^xsd:string ;
+	wikiprov:endtime "2002-09-17T03:11:31Z"^^xsd:string ;
+	wikiprov:id "comment559734"^^xsd:string ;
+	wikiprov:revid "559734"^^xsd:string ;
+	wikiprov:starttime "null"^^xsd:string ;
+	a "edit"^^xsd:string ;
+	prov:endedAtTime "2002-09-17T03:11:31Z"^^xsd:dateTime ;
+	prov:qualifiedAssociation wikiprov:comment559734Mav .
+# 
+# http://purl.org/net/wikiprov#comment559734Mav
+
+wikiprov:comment559734Mav a owl:NamedIndividual , prov:Association ;
+	wikiprov:activity "comment559734"^^xsd:string ;
+	wikiprov:agent "Mav"^^xsd:string ;
+	wikiprov:id "comment559734Mav"^^xsd:string ;
+	wikiprov:publicationpolicy "null"^^xsd:string ;
+	wikiprov:relationshipName "comment559734Mav"^^xsd:string ;
+	wikiprov:user_name "Mav"^^xsd:string ;
+	prov:agent wikiprov:Mav .
+# 
+# http://purl.org/net/wikiprov#559734generation
+
+wikiprov:559734generation a owl:NamedIndividual , prov:Generation ;
+	wikiprov:activity "comment559734"^^xsd:string ;
+	wikiprov:comment ""^^xsd:string ;
+	wikiprov:entity "559734"^^xsd:string ;
+	wikiprov:id "559734generation"^^xsd:string ;
+	wikiprov:relationshipName "559734generation"^^xsd:string ;
+	wikiprov:time "2002-09-17T03:11:31Z"^^xsd:string ;
+	prov:activity wikiprov:activity_559734 ;
+	prov:atTime "2002-09-17T03:11:31Z"^^xsd:dateTime .
+# 
+# Generated by the OWL API (version 4.1.3.20151118-2017) https://github.com/owlcs/owlapi

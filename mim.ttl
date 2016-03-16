@@ -1,259 +1,375 @@
-@prefix :        <http://purl.org/net/mim/ns#> .
-@prefix dc:      <http://purl.org/dc/elements/1.1/> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix owl2xml:  <http://www.w3.org/2006/12/owl2-xml#> .
-@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://purl.org/net/mim/ns#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl2xml: <http://www.w3.org/2006/12/owl2-xml#> .
 
-dc:creator
-      rdf:type owl:AnnotationProperty .
+<http://purl.org/net/mim/ns> a owl:Ontology ;
+	owl:versionIRI <https://cdn.rawgit.com/ResearchObject/mim-vocabulary/2014-04-30/mim.ttl> ;
+	rdfs:seeAlso <https://github.com/ResearchObject/mim-vocabulary> , <https://www.escholar.manchester.ac.uk/uk-ac-man-scw:224381> ;
+	rdfs:label "Minimum Information Model vocabulary" ;
+	<http://purl.org/dc/terms/creator> <http://orcid.org/0000-0003-4913-1485> ;
+	owl:versionInfo "0.1.2014-04-30"^^xsd:string ;
+	dc:creator "Matthew Gamble" .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/dc/elements/1.1/creator
 
-<http://purl.org/net/mim/ns>
-      rdf:type owl:Ontology ;
-      dc:creator "Matthew Gamble" .
+dc:creator a owl:AnnotationProperty .
+# 
+# http://purl.org/dc/terms/creator
 
-:Condition
-      rdf:type owl:Class ;
-      rdfs:subClassOf owl:Thing .
+<http://purl.org/dc/terms/creator> a owl:AnnotationProperty ;
+	rdfs:subPropertyOf dc:creator .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/mim/ns#additionallySatisfies
 
-:DataReport
-      rdf:type owl:Class ;
-      rdfs:subClassOf :Report ;
-      owl:equivalentClass
-              [ rdf:type owl:Restriction ;
-                owl:onProperty :reports ;
-                owl:someValuesFrom :DataRequirement
-              ] .
+:additionallySatisfies a owl:ObjectProperty ;
+	rdfs:subPropertyOf :satisfies .
+# 
+# http://purl.org/net/mim/ns#adequatelySatisfies
 
-:DataRequirement
-      rdf:type owl:Class ;
-      rdfs:subClassOf :Requirement .
+:adequatelySatisfies a owl:ObjectProperty ;
+	rdfs:subPropertyOf :satisfies .
+# 
+# http://purl.org/net/mim/ns#contains
 
-:MIM  rdf:type owl:Class ;
-      rdfs:comment "Model identifies the top level Minimum Information Model that is being defined."@en ;
-      rdfs:subClassOf :ReportSet ;
-      owl:equivalentClass
-              [ rdf:type owl:Restriction ;
-                owl:onProperty :hasRequirement ;
-                owl:someValuesFrom :Requirement
-              ] .
+:contains a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty .
+# 
+# http://purl.org/net/mim/ns#containsDataReport
 
-:ObjectReport
-      rdf:type owl:Class ;
-      rdfs:subClassOf :Report ;
-      owl:equivalentClass
-              [ rdf:type owl:Restriction ;
-                owl:onProperty :reports ;
-                owl:someValuesFrom :ObjectRequirement
-              ] .
+:containsDataReport a owl:ObjectProperty ;
+	rdfs:subPropertyOf :containsReport ;
+	rdfs:domain :Report ;
+	rdfs:range :DataReport .
+# 
+# http://purl.org/net/mim/ns#containsReport
 
-:ObjectRequirement
-      rdf:type owl:Class ;
-      rdfs:subClassOf :Requirement .
+:containsReport a owl:ObjectProperty ;
+	rdfs:subPropertyOf :contains ;
+	rdfs:domain :ReportSet ;
+	rdfs:range :Report .
+# 
+# http://purl.org/net/mim/ns#containsReportSet
 
-:Report
-      rdf:type owl:Class ;
-      rdfs:comment "A Report identifies the instance of an attempt to report a requirement in a minimum information model. A report must indicate the requirement that it reports." ;
-      owl:equivalentClass
-              [] .
+:containsReportSet a owl:ObjectProperty ;
+	rdfs:subPropertyOf :contains ;
+	rdfs:domain :ReportSet ;
+	rdfs:range :ReportSet .
+# 
+# http://purl.org/net/mim/ns#directInstanceOf
 
-:ReportSet
-      rdf:type owl:Class ;
-      owl:equivalentClass
-              [ rdf:type owl:restriction ;
-                owl:hasSelf "true"^^xsd:boolean ;
-                owl:onProperty :contains
-              ] .
+:directInstanceOf a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range rdfs:Class .
 
-:Requirement
-      rdf:type owl:Class ;
-      rdfs:comment "A requirement is an atomic reporting requirement for a minimum information model."@en .
+rdfs:Class a owl:Class .
+# 
+# http://purl.org/net/mim/ns#directSubclassOf
 
-:RequirementSet
-      rdf:type owl:Class .
+:directSubclassOf a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range rdfs:Class .
+# 
+# http://purl.org/net/mim/ns#hasMustRequirement
 
-:Restriction
-      rdf:type owl:Class ;
-      rdfs:subClassOf owl:Thing .
+:hasMustRequirement a owl:ObjectProperty ;
+	rdfs:subPropertyOf :hasRequirement .
+# 
+# http://purl.org/net/mim/ns#hasOptionalRequirement
 
-:Rule
-      rdf:type owl:Class .
+:hasOptionalRequirement a owl:ObjectProperty ;
+	rdfs:subPropertyOf :hasRequirement .
+# 
+# http://purl.org/net/mim/ns#hasRequirement
 
-:additionallySatisfies
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :satisfies .
+:hasRequirement a owl:ObjectProperty ;
+	rdfs:subPropertyOf :contains ;
+	rdfs:domain :RequirementSet ;
+	rdfs:range :Requirement , :RequirementSet .
+# 
+# http://purl.org/net/mim/ns#hasRestriction
 
-:adequatelySatisfies
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :satisfies .
+:hasRestriction a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Requirement , :RequirementSet ;
+	rdfs:range :Restriction .
+# 
+# http://purl.org/net/mim/ns#hasShouldRequirement
 
-:cardinality
-      rdf:type owl:DatatypeProperty .
+:hasShouldRequirement a owl:ObjectProperty ;
+	rdfs:subPropertyOf :hasRequirement .
+# 
+# http://purl.org/net/mim/ns#identifies
 
-:contains
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:identifies a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	owl:inverseOf :isIdentifiedBy ;
+	rdfs:domain :Rule ;
+	rdfs:range :Requirement .
+# 
+# http://purl.org/net/mim/ns#instanceOf
 
-:containsDataReport
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Report ;
-      rdfs:range :DataReport ;
-      rdfs:subPropertyOf :containsReport .
+:instanceOf a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range rdfs:Class .
+# 
+# http://purl.org/net/mim/ns#isConditionalUpon
 
-:containsReport
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :ReportSet ;
-      rdfs:range :Report ;
-      rdfs:subPropertyOf :contains .
+:isConditionalUpon a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range :Condition .
+# 
+# http://purl.org/net/mim/ns#isIdentifiedBy
 
-:containsReportSet
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :ReportSet ;
-      rdfs:range :ReportSet ;
-      rdfs:subPropertyOf :contains .
+:isIdentifiedBy a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Requirement ;
+	rdfs:range :Rule .
+# 
+# http://purl.org/net/mim/ns#isReportedBy
 
-:directInstanceOf
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range rdfs:Class ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:isReportedBy a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	owl:inverseOf :reports .
+# 
+# http://purl.org/net/mim/ns#isSatisfiedBy
 
-:directSubclassOf
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range rdfs:Class ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:isSatisfiedBy a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty .
+# 
+# http://purl.org/net/mim/ns#maximallySatisfies
 
-:exactCardinality
-      rdf:type owl:DatatypeProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range xsd:positiveInteger ;
-      rdfs:subPropertyOf :cardinality .
+:maximallySatisfies a owl:ObjectProperty ;
+	rdfs:subPropertyOf :satisfies .
+# 
+# http://purl.org/net/mim/ns#minimallySatisfies
 
-:hasMustRequirement
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :hasRequirement .
+:minimallySatisfies a owl:ObjectProperty ;
+	rdfs:subPropertyOf :satisfies .
+# 
+# http://purl.org/net/mim/ns#onRequirement
 
-:hasOptionalRequirement
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :hasRequirement .
+:onRequirement a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range :Requirement , :RequirementSet .
+# 
+# http://purl.org/net/mim/ns#partOf
 
-:hasRequirement
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :RequirementSet ;
-      rdfs:range :Requirement , :RequirementSet ;
-      rdfs:subPropertyOf :contains .
+:partOf a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Requirement ;
+	rdfs:range :RequirementSet .
+# 
+# http://purl.org/net/mim/ns#reports
 
-:hasRestriction
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :RequirementSet , :Requirement ;
-      rdfs:range :Restriction ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:reports a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Report , :ReportSet ;
+	rdfs:range :Requirement , :RequirementSet .
+# 
+# http://purl.org/net/mim/ns#satisfies
 
-:hasShouldRequirement
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :hasRequirement .
+:satisfies a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty .
+# 
+# http://purl.org/net/mim/ns#subClassOf
 
-:identifies
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Rule ;
-      rdfs:range :Requirement ;
-      rdfs:subPropertyOf owl:topObjectProperty ;
-      owl:inverseOf :isIdentifiedBy .
+:subClassOf a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range rdfs:Class .
+# 
+# http://purl.org/net/mim/ns#type
 
-:instanceOf
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range rdfs:Class ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:type a owl:ObjectProperty ;
+	rdfs:subPropertyOf owl:topObjectProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range rdfs:Datatype .
 
-:isConditionalUpon
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range :Condition ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+rdfs:Datatype a owl:Class .
+# 
+# http://www.w3.org/2002/07/owl#topObjectProperty
 
-:isIdentifiedBy
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Requirement ;
-      rdfs:range :Rule ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+owl:topObjectProperty a owl:ObjectProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/mim/ns#cardinality
 
-:isReportedBy
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf owl:topObjectProperty ;
-      owl:inverseOf :reports .
+:cardinality a owl:DatatypeProperty .
+# 
+# http://purl.org/net/mim/ns#exactCardinality
 
-:isSatisfiedBy
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:exactCardinality a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :cardinality ;
+	rdfs:domain :Restriction ;
+	rdfs:range xsd:positiveInteger .
+# 
+# http://purl.org/net/mim/ns#maxCardinality
 
-:maxCardinality
-      rdf:type owl:DatatypeProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range xsd:positiveInteger ;
-      rdfs:subPropertyOf :cardinality .
+:maxCardinality a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :cardinality ;
+	rdfs:domain :Restriction ;
+	rdfs:range xsd:positiveInteger .
+# 
+# http://purl.org/net/mim/ns#minCardinality
 
-:maximallySatisfies
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :satisfies .
+:minCardinality a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :cardinality ;
+	rdfs:domain :Restriction ;
+	rdfs:range xsd:positiveInteger .
+# 
+# http://purl.org/net/mim/ns#onSelf
 
-:minCardinality
-      rdf:type owl:DatatypeProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range xsd:positiveInteger ;
-      rdfs:subPropertyOf :cardinality .
+:onSelf a owl:DatatypeProperty ;
+	rdfs:domain :Restriction ;
+	rdfs:range xsd:boolean .
+# 
+# http://purl.org/net/mim/ns#withValue
 
-:minimallySatisfies
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf :satisfies .
+:withValue a owl:DatatypeProperty ;
+	rdfs:domain :DataReport .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://org.semanticweb.owlapi/error#Error1
 
-:onRequirement
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range :Requirement , :RequirementSet ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+<http://org.semanticweb.owlapi/error#Error1> a owl:Class ;
+	owl:equivalentClass :Report .
+# 
+# http://purl.org/net/mim/ns#Condition
 
-:onSelf
-      rdf:type owl:DatatypeProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range xsd:boolean .
+:Condition a owl:Class ;
+	rdfs:subClassOf owl:Thing .
+# 
+# http://purl.org/net/mim/ns#DataReport
 
-:partOf
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Requirement ;
-      rdfs:range :RequirementSet ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:DataReport a owl:Class ;
+	owl:equivalentClass _:genid1 .
 
-:reports
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :ReportSet , :Report ;
-      rdfs:range :RequirementSet , :Requirement ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+_:genid1 a owl:Restriction ;
+	owl:onProperty :reports ;
+	owl:someValuesFrom :DataRequirement .
 
-:satisfies
-      rdf:type owl:ObjectProperty ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:DataReport rdfs:subClassOf :Report .
+# 
+# http://purl.org/net/mim/ns#DataRequirement
 
-:subClassOf
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range rdfs:Class ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:DataRequirement a owl:Class ;
+	rdfs:subClassOf :Requirement .
+# 
+# http://purl.org/net/mim/ns#MIM
 
-:type
-      rdf:type owl:ObjectProperty ;
-      rdfs:domain :Restriction ;
-      rdfs:range rdfs:Datatype ;
-      rdfs:subPropertyOf owl:topObjectProperty .
+:MIM a owl:Class ;
+	owl:equivalentClass _:genid2 .
 
-:withValue
-      rdf:type owl:DatatypeProperty ;
-      rdfs:domain :DataReport .
+_:genid2 a owl:Restriction ;
+	owl:onProperty :hasRequirement ;
+	owl:someValuesFrom :Requirement .
 
-owl:Thing
-      rdf:type owl:Class .
+:MIM rdfs:subClassOf :ReportSet ;
+	rdfs:comment "Model identifies the top level Minimum Information Model that is being defined."@en .
+# 
+# http://purl.org/net/mim/ns#ObjectReport
 
-owl:topObjectProperty
-      rdf:type owl:ObjectProperty .
+:ObjectReport a owl:Class ;
+	owl:equivalentClass _:genid3 .
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty :reports ;
+	owl:someValuesFrom :ObjectRequirement .
+
+:ObjectReport rdfs:subClassOf :Report .
+# 
+# http://purl.org/net/mim/ns#ObjectRequirement
+
+:ObjectRequirement a owl:Class ;
+	rdfs:subClassOf :Requirement .
+# 
+# http://purl.org/net/mim/ns#Report
+
+:Report a owl:Class ;
+	rdfs:comment "A Report identifies the instance of an attempt to report a requirement in a minimum information model. A report must indicate the requirement that it reports." .
+# 
+# http://purl.org/net/mim/ns#ReportSet
+
+:ReportSet a owl:Class ;
+	owl:equivalentClass _:genid4 .
+
+_:genid4 a owl:Restriction ;
+	owl:onProperty :contains ;
+	owl:hasSelf "true"^^xsd:boolean .
+# 
+# http://purl.org/net/mim/ns#Requirement
+
+:Requirement a owl:Class ;
+	rdfs:comment "A requirement is an atomic reporting requirement for a minimum information model."@en .
+# 
+# http://purl.org/net/mim/ns#RequirementSet
+
+:RequirementSet a owl:Class .
+# 
+# http://purl.org/net/mim/ns#Restriction
+
+:Restriction a owl:Class ;
+	rdfs:subClassOf owl:Thing .
+# 
+# http://purl.org/net/mim/ns#Rule
+
+:Rule a owl:Class .
+# 
+# http://www.w3.org/2000/01/rdf-schema#Class
+# 
+# http://www.w3.org/2000/01/rdf-schema#Datatype
+# 
+# http://www.w3.org/2002/07/owl#Thing
+
+owl:Thing a owl:Class .
+# 
+# http://www.w3.org/2002/07/owl#restriction
+
+owl:restriction a owl:Class .
+# 
+
+_:genid5 a owl:restriction .
+# Generated by the OWL API (version 4.1.3.20151118-2017) https://github.com/owlcs/owlapi

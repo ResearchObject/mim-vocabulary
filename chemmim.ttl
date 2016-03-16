@@ -1,113 +1,198 @@
-@prefix :        <http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#> .
-@prefix dc:      <http://purl.org/dc/elements/1.1/> .
-@prefix dcterms:  <http://purl.org/dc/terms/> .
-@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
-@prefix mim:     <http://purl.org/net/mim/ns#> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix mim: <http://purl.org/net/mim/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
-<http://sierra-nevada.cs.man.ac.uk/mim/chembox/chemmim>
-      rdf:type owl:Ontology ;
-      owl:imports <http://purl.org/net/mim/ns> .
+<http://sierra-nevada.cs.man.ac.uk/mim/chembox/chemmim> a owl:Ontology ;
+	owl:versionIRI <https://cdn.rawgit.com/ResearchObject/mim-vocabulary/2014-04-30/mim.ttl> ;
+	owl:imports <http://purl.org/net/mim/ns> ;
+	rdfs:seeAlso <https://github.com/ResearchObject/mim-vocabulary> , <https://www.escholar.manchester.ac.uk/uk-ac-man-scw:224381> ;
+	dcterms:creator <http://orcid.org/0000-0003-4913-1485> ;
+	owl:versionInfo "0.1.2014-04-30" ;
+	rdfs:label "Chemmim Checklist" ;
+	dc:creator "Matthew Gamble" .
+# 
+# 
+# #################################################################
+# #
+# #    Annotation properties
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/mim/ns#hasOptionalRequiremet
 
-:MIC  rdf:type mim:MIC ;
-      mim:hasMustRequirement
-              :Properties , :Identifiers ;
-      mim:hasOptionalRequiremet
-              :Synonym ;
-      mim:hasRestriction
-              [ mim:exactCardinality
-                        1 ;
-                mim:onRequirement :Properties , :Identfiers
-              ] ;
-      mim:hasShouldRequirement
-              :IUPACName , :Image .
+mim:hasOptionalRequiremet a owl:AnnotationProperty .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/mim/ns#MIC
 
-:MeltingPoint
-      rdf:type mim:RequirementSet ;
-      mim:hasMustRequirement
-              :MeltingPointUnits , :MeltingPointValue ;
-      mim:hasRestriction
-              [ mim:exactCardinality
-                        1 ;
-                mim:onRequirement :MeltingPointUnits , :MeltingPointValue
-              ] .
+mim:MIC a owl:Class .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#ChemSpider
 
-:ChemSpider
-      rdf:type mim:DataRequirement ;
-      mim:hasRestriction
-              [ mim:onSelf "true"^^xsd:boolean ;
-                mim:type xsd:integer
-              ] .
+:ChemSpider a owl:NamedIndividual , mim:DataRequirement ;
+	mim:hasRestriction _:genid1 .
 
-:Identifiers
-      rdf:type mim:RequirementSet ;
-      mim:hasMustRequirement
-              :InChI , :SMILES ;
-      mim:hasShouldRequirement
-              :ChemSpider , :PubChem .
+_:genid1 mim:type xsd:integer .
 
-:InChI
-      rdf:type mim:DataRequirement ;
-      mim:hasRestriction
-              [ mim:onSelf "true"^^xsd:boolean ;
-                mim:type xsd:string
-              ] .
+xsd:integer a owl:NamedIndividual .
 
-:MolarMass
-      rdf:type mim:DataRequirement .
+_:genid1 mim:onSelf "true"^^xsd:boolean .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#IUPACName
 
-:MolecularFormula
-      rdf:type mim:DataRequirement ;
-      mim:hasRestriction
-              [ mim:onSelf "true"^^xsd:boolean ;
-                mim:type xsd:string
-              ] .
+:IUPACName a owl:NamedIndividual , mim:DataRequirement .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#Identfiers
 
-:Properties
-      rdf:type mim:RequirementSet ;
-      mim:hasMustRequirement
-              :MolecularFormula ;
-      mim:hasOptionalRequirement
-              :Solubility ;
-      mim:hasRestriction
-              [ mim:exactCardinality
-                        1 ;
-                mim:onRequirement :MolecularFormula
-              ] ;
-      mim:hasShouldRequirement
-              :MeltingPoint , :MolarMass .
+:Identfiers a owl:NamedIndividual .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#Identifiers
 
-:PubChem
-      rdf:type mim:DataRequirement ;
-      mim:hasRestriction
-              [ mim:onSelf "true"^^xsd:boolean ;
-                mim:type xsd:integer
-              ] .
+:Identifiers a owl:NamedIndividual , mim:RequirementSet ;
+	mim:hasMustRequirement :InChI .
 
-:SMILES
-      rdf:type mim:DataRequirement ;
-      mim:hasRestriction
-              [ mim:onSelf "true"^^xsd:boolean ;
-                mim:type xsd:string
-              ] .
+:InChI a owl:NamedIndividual .
 
-:Solubility
-      rdf:type mim:DataRequirement .
+:Identifiers mim:hasMustRequirement :SMILES .
 
-:Synonym
-      rdf:type mim:DataRequirement .
+:SMILES a owl:NamedIndividual .
 
-:Image
-	rdf:type mim:DataRequirement .
+:Identifiers mim:hasShouldRequirement :ChemSpider , :PubChem .
 
-:IUPACName
-	rdf:type mim:DataRequirement .
+:PubChem a owl:NamedIndividual .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#Image
 
-:MeltingPointUnits
-	rdf:type mim:DataRequirement .
+:Image a owl:NamedIndividual , mim:DataRequirement .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#InChI
 
-:MeltingPointValue
-	rdf:type mim:DataRequirement .
+:InChI a mim:DataRequirement ;
+	mim:hasRestriction _:genid2 .
+
+_:genid2 mim:type xsd:string .
+
+xsd:string a owl:NamedIndividual .
+
+_:genid2 mim:onSelf "true"^^xsd:boolean .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#MIC
+
+:MIC a owl:NamedIndividual , mim:MIC ;
+	mim:hasMustRequirement :Identifiers , :Properties .
+
+:Properties a owl:NamedIndividual .
+
+:MIC mim:hasRestriction _:genid3 .
+
+_:genid3 mim:onRequirement :Identfiers , :Properties ;
+	mim:exactCardinality "1"^^xsd:integer .
+
+:MIC mim:hasShouldRequirement :IUPACName , :Image ;
+	mim:hasOptionalRequiremet :Synonym .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#MeltingPoint
+
+:MeltingPoint a owl:NamedIndividual , mim:RequirementSet ;
+	mim:hasMustRequirement :MeltingPointUnits .
+
+:MeltingPointUnits a owl:NamedIndividual .
+
+:MeltingPoint mim:hasMustRequirement :MeltingPointValue .
+
+:MeltingPointValue a owl:NamedIndividual .
+
+:MeltingPoint mim:hasRestriction _:genid4 .
+
+_:genid4 mim:onRequirement :MeltingPointUnits , :MeltingPointValue ;
+	mim:exactCardinality "1"^^xsd:integer .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#MeltingPointUnits
+
+:MeltingPointUnits a mim:DataRequirement .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#MeltingPointValue
+
+:MeltingPointValue a mim:DataRequirement .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#MolarMass
+
+:MolarMass a owl:NamedIndividual , mim:DataRequirement .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#MolecularFormula
+
+:MolecularFormula a owl:NamedIndividual , mim:DataRequirement ;
+	mim:hasRestriction _:genid5 .
+
+_:genid5 mim:type xsd:string ;
+	mim:onSelf "true"^^xsd:boolean .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#Properties
+
+:Properties a mim:RequirementSet ;
+	mim:hasMustRequirement :MolecularFormula ;
+	mim:hasOptionalRequirement :Solubility .
+
+:Solubility a owl:NamedIndividual .
+
+:Properties mim:hasRestriction _:genid6 .
+
+_:genid6 mim:onRequirement :MolecularFormula ;
+	mim:exactCardinality "1"^^xsd:integer .
+
+:Properties mim:hasShouldRequirement :MeltingPoint , :MolarMass .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#PubChem
+
+:PubChem a mim:DataRequirement ;
+	mim:hasRestriction _:genid7 .
+
+_:genid7 mim:type xsd:integer ;
+	mim:onSelf "true"^^xsd:boolean .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#SMILES
+
+:SMILES a mim:DataRequirement ;
+	mim:hasRestriction _:genid8 .
+
+_:genid8 mim:type xsd:string ;
+	mim:onSelf "true"^^xsd:boolean .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#Solubility
+
+:Solubility a mim:DataRequirement .
+# 
+# http://sierra-nevada.cs.man.ac.uk/mim/chembox/chembox-mim#Synonym
+
+:Synonym a owl:NamedIndividual , mim:DataRequirement .
+# 
+# http://www.w3.org/2001/XMLSchema#integer
+# 
+# http://www.w3.org/2001/XMLSchema#string
+# 
+# Generated by the OWL API (version 4.1.3.20151118-2017) https://github.com/owlcs/owlapi

@@ -1,86 +1,294 @@
-# baseURI: http://purl.org/net/mim/mimspin
-# imports: http://purl.org/net/mim/ns
-# imports: http://spinrdf.org/spin
-# imports: http://spinrdf.org/spl
+@prefix : <http://purl.org/net/mim/mimspin#> .
+@prefix fn: <http://www.w3.org/2005/xpath-functions#> .
+@prefix sp: <http://spinrdf.org/sp#> .
+@prefix mim: <http://purl.org/net/mim/ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix spl: <http://spinrdf.org/spl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix spin: <http://spinrdf.org/spin#> .
 
-@prefix :        <http://purl.org/net/mim/mimspin#> .
-@prefix fn:      <http://www.w3.org/2005/xpath-functions#> .
-@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
-@prefix mim:     <http://purl.org/net/mim/ns#> .
-@prefix mimspin:  <http://purl.org/net/mim/mimspin#> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
-@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sp:      <http://spinrdf.org/sp#> .
-@prefix spin:    <http://spinrdf.org/spin#> .
-@prefix spl:     <http://spinrdf.org/spl#> .
-@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+<http://purl.org/net/mim/mimspin> a owl:Ontology ;
+	owl:versionIRI <https://cdn.rawgit.com/ResearchObject/mim-vocabulary/2014-04-30/mimspin.ttl> ;
+	owl:imports <http://purl.org/net/mim/ns> , <http://spinrdf.org/spin> , <http://spinrdf.org/spl> ;
+	rdfs:seeAlso <https://github.com/ResearchObject/mim-vocabulary> , <https://www.escholar.manchester.ac.uk/uk-ac-man-scw:224381> ;
+	<http://purl.org/dc/terms/creator> <http://orcid.org/0000-0003-4913-1485> ;
+	owl:versionInfo "0.1.2014-04-30"^^xsd:string ;
+	rdfs:label "Minimum Information Model SPIN Semantics"^^xsd:string ;
+	<http://purl.org/dc/elements/1.1/creator> "Matthew Gamble" .
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://spinrdf.org/spin#onceRule
 
-<http://purl.org/net/mim/mimspin>
-      rdf:type owl:Ontology ;
-      owl:imports <http://spinrdf.org/spin> , <http://purl.org/net/mim/ns> , <http://spinrdf.org/spl> ;
-      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+spin:onceRule a owl:ObjectProperty ;
+	rdfs:subPropertyOf spin:rule .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/mim/mimspin#ChecklistSatisfaction
 
-mimspin:ChecklistSatisfaction
-      rdf:type spin:ConstructTemplate ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:abstract "true"^^xsd:boolean .
+:ChecklistSatisfaction a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
 
-mimspin:ConstructTemplates
-      rdf:type spin:ConstructTemplate ;
-      rdfs:subClassOf spin:ConstructTemplates ;
-      spin:abstract "true"^^xsd:boolean .
+:ConstructTemplates a owl:Class .
+# 
+# http://purl.org/net/mim/mimspin#ConstructTemplates
 
-mimspin:Contains
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:ConstructTemplates rdfs:subClassOf spin:ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#Contains
+
+:Contains a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#ContainsReport
+
+:ContainsReport a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#DataReport
+
+:DataReport a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#DataRequirementSatisfaction
+
+:DataRequirementSatisfaction a owl:Class ;
+	rdfs:subClassOf :RequirementSatisfaction .
+
+:RequirementSatisfaction a owl:Class .
+# 
+# http://purl.org/net/mim/mimspin#Functions
+
+:Functions a owl:Class ;
+	rdfs:subClassOf spin:Functions .
+# 
+# http://purl.org/net/mim/mimspin#ObjectRequirementSatisfaction
+
+:ObjectRequirementSatisfaction a owl:Class ;
+	rdfs:subClassOf :RequirementSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#Report
+
+:Report a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#ReportSet
+
+:ReportSet a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#ReportSetContainsSelf
+
+:ReportSetContainsSelf a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#RequirementSatisfaction
+
+:RequirementSatisfaction rdfs:subClassOf :ChecklistSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#RequirementSet
+
+:RequirementSet a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#RequirementSetSatisfaction
+
+:RequirementSetSatisfaction a owl:Class ;
+	rdfs:subClassOf :ChecklistSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#Satisfies
+
+:Satisfies a owl:Class ;
+	rdfs:subClassOf :ConstructTemplates .
+# 
+# http://purl.org/net/mim/mimspin#additionallySastisfies
+
+:additionallySastisfies a owl:Class ;
+	rdfs:subClassOf :RequirementSetSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#adequatelySastisfies
+
+:adequatelySastisfies a owl:Class ;
+	rdfs:subClassOf :RequirementSetSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfied
+
+:hasUnsatisfied a owl:Class ;
+	rdfs:subClassOf :Functions .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedMustRequirement
+
+:hasUnsatisfiedMustRequirement a owl:Class ;
+	rdfs:subClassOf :hasUnsatisfied .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedMustRequirement_1
+
+:hasUnsatisfiedMustRequirement_1 a owl:Class ;
+	rdfs:subClassOf :hasUnsatisfied .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedOptionalRequirement
+
+:hasUnsatisfiedOptionalRequirement a owl:Class ;
+	rdfs:subClassOf :hasUnsatisfied .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedRequirement
+
+:hasUnsatisfiedRequirement a owl:Class ;
+	rdfs:subClassOf :hasUnsatisfied .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedShouldRequirement
+
+:hasUnsatisfiedShouldRequirement a owl:Class ;
+	rdfs:subClassOf :hasUnsatisfied .
+# 
+# http://purl.org/net/mim/mimspin#maximallySastisfies
+
+:maximallySastisfies a owl:Class ;
+	rdfs:subClassOf :RequirementSetSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#minimallySastisfies
+
+:minimallySastisfies a owl:Class ;
+	rdfs:subClassOf :RequirementSetSatisfaction .
+# 
+# http://purl.org/net/mim/mimspin#missingAdequatelySatisfyingChild
+
+:missingAdequatelySatisfyingChild a owl:Class ;
+	rdfs:subClassOf :Functions .
+# 
+# http://purl.org/net/mim/mimspin#reportCount
+
+:reportCount a owl:Class ;
+	rdfs:subClassOf :Functions .
+# 
+# http://purl.org/net/mim/mimspin#satisfyingReportCount
+
+:satisfyingReportCount a owl:Class ;
+	rdfs:subClassOf :Functions .
+# 
+# http://purl.org/net/mim/mimspin#violatesCardinality
+
+:violatesCardinality a owl:Class ;
+	rdfs:subClassOf :Functions .
+# 
+# http://purl.org/net/mim/mimspin#violatesDatatypeRestriction
+
+:violatesDatatypeRestriction a owl:Class ;
+	rdfs:subClassOf :violatesRestriction .
+
+:violatesRestriction a owl:Class .
+# 
+# http://purl.org/net/mim/mimspin#violatesDefaultCardinality
+
+:violatesDefaultCardinality a owl:Class ;
+	rdfs:subClassOf :violatesCardinality .
+# 
+# http://purl.org/net/mim/mimspin#violatesExactCardinality
+
+:violatesExactCardinality a owl:Class ;
+	rdfs:subClassOf :violatesCardinality .
+# 
+# http://purl.org/net/mim/mimspin#violatesMaxCardinality
+
+:violatesMaxCardinality a owl:Class ;
+	rdfs:subClassOf :violatesCardinality .
+# 
+# http://purl.org/net/mim/mimspin#violatesMinCardinality
+
+:violatesMinCardinality a owl:Class ;
+	rdfs:subClassOf :violatesCardinality .
+# 
+# http://purl.org/net/mim/mimspin#violatesObjectInstanceOfRestriction
+
+:violatesObjectInstanceOfRestriction a owl:Class ;
+	rdfs:subClassOf :violatesRestriction .
+# 
+# http://purl.org/net/mim/mimspin#violatesRestriction
+
+:violatesRestriction rdfs:subClassOf :Functions .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://purl.org/net/mim/mimspin#ChecklistSatisfaction
+
+:ChecklistSatisfaction a owl:NamedIndividual , spin:ConstructTemplate .
+# 
+# http://purl.org/net/mim/mimspin#ConstructTemplates
+
+:ConstructTemplates a owl:NamedIndividual , spin:ConstructTemplate .
+# 
+# http://purl.org/net/mim/mimspin#Contains
+
+:Contains a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid1 .
+
+_:genid1 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x mim:contains ?y .
 }
 WHERE {
     ?x (mim:containsReport|mim:containsReportSet)|mim:containsDataReport ?y .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: Contains inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#ContainsReport
 
-mimspin:ContainsReport
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:ContainsReport a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid2 .
+
+_:genid2 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x mim:containsReport ?y .
 }
 WHERE {
     ?x mim:containsDataReport ?y .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: Contains Report inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#DataReport
 
-mimspin:DataReport
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:DataReport a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid3 .
+
+_:genid3 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x a mim:DataReport .
 }
 WHERE {
     ?x mim:reports ?y .
     ?x mim:withValue ?value .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: DataReport inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#DataRequirementSatisfaction
 
-mimspin:DataRequirementSatisfaction
-      rdf:type spin:ConstructTemplate ;
-      rdfs:comment "Requirement Satisfaction"^^xsd:string ;
-      rdfs:subClassOf mimspin:RequirementSatisfaction ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """# DataReport satisfies DataRequirement
+:DataRequirementSatisfaction a owl:NamedIndividual , spin:ConstructTemplate ;
+	spin:body _:genid4 .
+
+_:genid4 a sp:Construct ;
+	sp:text """# DataReport satisfies DataRequirement
 CONSTRUCT {
     ?z mim:satisfies ?y .
 }
@@ -92,22 +300,19 @@ WHERE {
     ?z mim:withValue ?v .
     BIND (mimspin:violatesDatatypeRestriction(?y, ?v) AS ?result) .
     FILTER (!?result) .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MiMSPIN : DataRequirementSatisfaction"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#Functions
 
-mimspin:Functions
-      rdf:type spin:Function ;
-      rdfs:subClassOf spin:Functions ;
-      spin:abstract "true"^^xsd:boolean .
+:Functions a owl:NamedIndividual , spin:Function .
+# 
+# http://purl.org/net/mim/mimspin#ObjectRequirementSatisfaction
 
-mimspin:ObjectRequirementSatisfaction
-      rdf:type spin:ConstructTemplate ;
-      rdfs:comment "Requirement Satisfaction"^^xsd:string ;
-      rdfs:subClassOf mimspin:RequirementSatisfaction ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """# ObjectReport satisfies ObjectRequirement : FIX type check!
+:ObjectRequirementSatisfaction a owl:NamedIndividual , spin:ConstructTemplate ;
+	spin:body _:genid5 .
+
+_:genid5 a sp:Construct ;
+	sp:text """# ObjectReport satisfies ObjectRequirement : FIX type check!
 CONSTRUCT {
     ?x mim:satisfies ?y .
 }
@@ -116,96 +321,88 @@ WHERE {
     ?y a mim:ObjectRequirement .
     ?x mim:reports ?y .
     FILTER (!mimspin:violatesObjectInstanceOfRestriction(?y, ?x)) .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN : ObjectRequirementSatisfaction"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#Report
 
-mimspin:Report
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:Report a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid6 .
+
+_:genid6 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x a mim:Report .
 }
 WHERE {
     ?x mim:reports ?y .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: Report inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#ReportSet
 
-mimspin:ReportSet
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:ReportSet a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid7 .
+
+_:genid7 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x a mim:ReportSet .
 }
 WHERE {
     ?x mim:contains ?y .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: ReportSet inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#ReportSetContainsSelf
 
-mimspin:ReportSetContainsSelf
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:ReportSetContainsSelf a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid8 .
+
+_:genid8 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?this mim:contains ?this .
 }
 WHERE {
     ?this a mim:ReportSet .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: ReportSet-contains-Self"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#RequirementSatisfaction
 
-mimspin:RequirementSatisfaction
-      rdf:type spin:ConstructTemplate ;
-      rdfs:subClassOf mimspin:ChecklistSatisfaction .
+:RequirementSatisfaction a owl:NamedIndividual , spin:ConstructTemplate .
+# 
+# http://purl.org/net/mim/mimspin#RequirementSet
 
-mimspin:RequirementSet
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:RequirementSet a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid9 .
+
+_:genid9 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x a mim:RequirementSet .
 }
 WHERE {
     ?x a mim:MIC .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: RequirementSet inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#RequirementSetSatisfaction
 
-mimspin:RequirementSetSatisfaction
-      rdf:type spin:ConstructTemplate ;
-      rdfs:subClassOf mimspin:ChecklistSatisfaction ;
-      spin:abstract "true"^^xsd:boolean .
+:RequirementSetSatisfaction a owl:NamedIndividual , spin:ConstructTemplate .
+# 
+# http://purl.org/net/mim/mimspin#Satisfies
 
-mimspin:Satisfies
-      rdf:type spin:Template ;
-      rdfs:subClassOf mimspin:ConstructTemplates ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:Satisfies a owl:NamedIndividual , spin:Template ;
+	spin:body _:genid10 .
+
+_:genid10 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x mim:satisfies ?y .
 }
 WHERE {
     ?x ((mim:minimallySatisfies|mim:additionallySatisfies)|mim:adequatelySatisfies)|mim:maximallySatisfies ?y .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN: Contains inference"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#additionallySastisfies
 
-mimspin:additionallySastisfies
-      rdf:type spin:ConstructTemplate ;
-      rdfs:comment "Additionally Satisfies"^^xsd:string ;
-      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:additionallySastisfies a owl:NamedIndividual , spin:ConstructTemplate ;
+	spin:body _:genid11 .
+
+_:genid11 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?arg1 mim:additionallySatisfies ?arg2 .
 }
 WHERE {
@@ -221,17 +418,15 @@ WHERE {
         ?arg1 mim:satisfies ?req .
     } .
     FILTER bound(?req) .
-}"""^^xsd:string
-              ] ;
-      spin:labelTemplate "MIMSPIN : AdditionallySatisfies"^^xsd:string .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#adequatelySastisfies
 
-mimspin:adequatelySastisfies
-      rdf:type spin:ConstructTemplate ;
-      rdfs:comment "Adequately Satisfies"^^xsd:string ;
-      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:adequatelySastisfies a owl:NamedIndividual , spin:ConstructTemplate ;
+	spin:body _:genid12 .
+
+_:genid12 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?arg1 mim:adequatelySatisfies ?arg2 .
     ?x mim:should ?should .
     ?x mim:adequate ?adequate .
@@ -244,20 +439,19 @@ WHERE {
     FILTER (?should) .
     BIND ((!mimspin:missingAdequatelySatisfyingChild(?arg2, ?arg1, mim:adequatelySatisfies)) AS ?adequate) .
     FILTER (?adequate) .
-}"""^^xsd:string
-              ] .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfied
 
-mimspin:hasUnsatisfied
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:Functions ;
-      spin:abstract "true"^^xsd:boolean .
+:hasUnsatisfied a owl:NamedIndividual , spin:Function .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedMustRequirement
 
-mimspin:hasUnsatisfiedMustRequirement
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:hasUnsatisfied ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """# is there animmediate must requirement in ReqSet that is violated the by RepSet ?
+:hasUnsatisfiedMustRequirement a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid13 .
+
+_:genid13 a sp:Ask ;
+	sp:text """# is there animmediate must requirement in ReqSet that is violated the by RepSet ?
 ASK WHERE {
     ?arg1 mim:hasMustRequirement ?Req .
     BIND (mimspin:reportCount(?arg2, ?Req) AS ?rc) .
@@ -270,26 +464,25 @@ ASK WHERE {
     BIND (mimspin:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact) .
     BIND (mimspin:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default) .
     FILTER ((((((?max || ?min) || ?exact) || ?smax) || ?smin) || ?sexact) || ?default) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The MIM to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:returnType xsd:integer .
+}"""^^xsd:string .
 
-mimspin:hasUnsatisfiedMustRequirement_1
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:hasUnsatisfied ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """# is there animmediate must requirement in ReqSet that is violated the by RepSet ?
+:hasUnsatisfiedMustRequirement spin:constraint _:genid14 .
+
+_:genid14 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+
+:hasUnsatisfiedMustRequirement spin:constraint _:genid15 .
+
+_:genid15 a spl:Argument ;
+	rdfs:comment "The MIM to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedMustRequirement_1
+
+:hasUnsatisfiedMustRequirement_1 a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid16 .
+
+_:genid16 a sp:Ask ;
+	sp:text """# is there animmediate must requirement in ReqSet that is violated the by RepSet ?
 ASK WHERE {
     ?arg1 mim:hasMustRequirement ?Req .
     BIND (:reportCount(?arg2, ?Req) AS ?rc) .
@@ -302,26 +495,25 @@ ASK WHERE {
     BIND (mimspin:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact) .
     BIND (mimspin:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default) .
     FILTER ((((((?max || ?min) || ?exact) || ?smax) || ?smin) || ?sexact) || ?default) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The MIM to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:integer .
+}"""^^xsd:string .
 
-mimspin:hasUnsatisfiedOptionalRequirement
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:hasUnsatisfied ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK
+:hasUnsatisfiedMustRequirement_1 spin:constraint _:genid17 .
+
+_:genid17 a spl:Argument ;
+	rdfs:comment "The MIM to be tested."^^xsd:string .
+
+:hasUnsatisfiedMustRequirement_1 spin:constraint _:genid18 .
+
+_:genid18 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedOptionalRequirement
+
+:hasUnsatisfiedOptionalRequirement a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid19 .
+
+_:genid19 a sp:Ask ;
+	sp:text """ASK
 WHERE
   { ?arg1 mim:hasOptionalRequirement ?Req
     BIND(:reportCount(?arg2, ?Req) AS ?rc)
@@ -334,26 +526,25 @@ WHERE
     BIND(:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact)
     BIND(:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default)
     FILTER ( ( ( ( ( ( ?max || ?min ) || ?exact ) || ?smax ) || ?smin ) || ?sexact ) || ?default )
-  }"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The MIM to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:integer .
+  }"""^^xsd:string .
 
-mimspin:hasUnsatisfiedRequirement
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:hasUnsatisfied ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK
+:hasUnsatisfiedOptionalRequirement spin:constraint _:genid20 .
+
+_:genid20 a spl:Argument ;
+	rdfs:comment "The MIM to be tested."^^xsd:string .
+
+:hasUnsatisfiedOptionalRequirement spin:constraint _:genid21 .
+
+_:genid21 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedRequirement
+
+:hasUnsatisfiedRequirement a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid22 .
+
+_:genid22 a sp:Ask ;
+	sp:text """ASK
 WHERE
   { ?arg1 mim:contains ?Req
     BIND(:reportCount(?arg2, ?Req) AS ?rc)
@@ -366,26 +557,25 @@ WHERE
     BIND(:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact)
     BIND(:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default)
     FILTER ( ( ( ( ( ( ?max || ?min ) || ?exact ) || ?smax ) || ?smin ) || ?sexact ) || ?default )
-  }"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The MIM to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:returnType xsd:integer .
+  }"""^^xsd:string .
 
-mimspin:hasUnsatisfiedShouldRequirement
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:hasUnsatisfied ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """
+:hasUnsatisfiedRequirement spin:constraint _:genid23 .
+
+_:genid23 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+
+:hasUnsatisfiedRequirement spin:constraint _:genid24 .
+
+_:genid24 a spl:Argument ;
+	rdfs:comment "The MIM to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#hasUnsatisfiedShouldRequirement
+
+:hasUnsatisfiedShouldRequirement a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid25 .
+
+_:genid25 a sp:Ask ;
+	sp:text """
 ASK
 WHERE
   { ?arg1 mim:hasShouldRequirement ?Req
@@ -400,27 +590,25 @@ WHERE
     BIND(:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default)
     FILTER ( ( ( ( ( ( ?max || ?min ) || ?exact ) || ?smax ) || ?smin ) || ?sexact ) || ?default )
   }
-"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The MIM to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:integer .
+"""^^xsd:string .
 
-mimspin:maximallySastisfies
-      rdf:type spin:ConstructTemplate ;
-      rdfs:comment "Maximally Satisfies"^^xsd:string ;
-      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:hasUnsatisfiedShouldRequirement spin:constraint _:genid26 .
+
+_:genid26 a spl:Argument ;
+	rdfs:comment "The MIM to be tested."^^xsd:string .
+
+:hasUnsatisfiedShouldRequirement spin:constraint _:genid27 .
+
+_:genid27 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#maximallySastisfies
+
+:maximallySastisfies a owl:NamedIndividual , spin:ConstructTemplate ;
+	spin:body _:genid28 .
+
+_:genid28 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?x mim:maximallySatisfies ?y .
     ?x mim:must ?must .
     ?x mim:should ?should .
@@ -436,16 +624,15 @@ WHERE {
     FILTER ((?must && ?should) && ?optional) .
     BIND ((!mimspin:missingAdequatelySatisfyingChild(?y, ?x, mim:maximallySatisfies)) AS ?adequate) .
     FILTER (?adequate) .
-}"""^^xsd:string
-              ] .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#minimallySastisfies
 
-mimspin:minimallySastisfies
-      rdf:type spin:ConstructTemplate ;
-      rdfs:comment "Minimally Satisfies"^^xsd:string ;
-      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
-      spin:body
-              [ rdf:type sp:Construct ;
-                sp:text """CONSTRUCT {
+:minimallySastisfies a owl:NamedIndividual , spin:ConstructTemplate ;
+	spin:body _:genid29 .
+
+_:genid29 a sp:Construct ;
+	sp:text """CONSTRUCT {
     ?reportSet mim:minimallySatisfies ?requirementSet .
 }
 WHERE {
@@ -454,15 +641,15 @@ WHERE {
     ?reportSet mim:reports ?requirementSet .
     BIND ((!mimspin:hasUnsatisfiedMustRequirement(?requirementSet, ?reportSet)) AS ?result) .
     FILTER (?result) .
-}"""^^xsd:string
-              ] .
+}"""^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#missingAdequatelySatisfyingChild
 
-mimspin:missingAdequatelySatisfyingChild
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:Functions ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """# is there an immediate  requirement in ReqSet that isnt {?arg3} satisfied the by RepSet ?
+:missingAdequatelySatisfyingChild a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid30 .
+
+_:genid30 a sp:Ask ;
+	sp:text """# is there an immediate  requirement in ReqSet that isnt {?arg3} satisfied the by RepSet ?
 ASK WHERE {
     ?arg1 a mim:RequirementSet .
     ?arg2 a mim:ReportSet .
@@ -476,30 +663,29 @@ ASK WHERE {
     MINUS {
         ?SubRepSet ?arg3 ?SubReqSet .
     } .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                spl:predicate sp:arg3
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The MIM to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:returnType xsd:integer .
+}"""^^xsd:string .
 
-mimspin:reportCount
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:Functions ;
-      spin:body
-              [ rdf:type sp:Select ;
-                sp:text """SELECT COUNT(DISTINCT ?report)
+:missingAdequatelySatisfyingChild spin:constraint _:genid31 .
+
+_:genid31 a spl:Argument .
+
+:missingAdequatelySatisfyingChild spin:constraint _:genid32 .
+
+_:genid32 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+
+:missingAdequatelySatisfyingChild spin:constraint _:genid33 .
+
+_:genid33 a spl:Argument ;
+	rdfs:comment "The MIM to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#reportCount
+
+:reportCount a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid34 .
+
+_:genid34 a sp:Select ;
+	sp:text """SELECT COUNT(DISTINCT ?report)
 WHERE {
     OPTIONAL {
         ?arg1 mim:contains ?report .
@@ -510,26 +696,25 @@ WHERE {
         ?z mim:reports ?arg2 .
         ?z mim:withValue ?report .
     } .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:integer .
+}"""^^xsd:string .
 
-mimspin:satisfyingReportCount
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:Functions ;
-      spin:body
-              [ rdf:type sp:Select ;
-                sp:text """# ReportSet reports Requirement count
+:reportCount spin:constraint _:genid35 .
+
+_:genid35 a spl:Argument ;
+	rdfs:comment "The Requirement to be tested."^^xsd:string .
+
+:reportCount spin:constraint _:genid36 .
+
+_:genid36 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#satisfyingReportCount
+
+:satisfyingReportCount a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid37 .
+
+_:genid37 a sp:Select ;
+	sp:text """# ReportSet reports Requirement count
 SELECT COUNT(DISTINCT ?report)
 WHERE {
     ?arg1 a mim:ReportSet .
@@ -542,55 +727,52 @@ WHERE {
         ?report mim:satisfies ?arg2 .
         ?report mim:withValue ?v .
     } .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:integer .
+}"""^^xsd:string .
 
-mimspin:violatesCardinality
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:Functions ;
-      spin:abstract "true"^^xsd:boolean .
+:satisfyingReportCount spin:constraint _:genid38 .
 
-mimspin:violatesDatatypeRestriction
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:violatesRestriction ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK WHERE {
+_:genid38 a spl:Argument ;
+	rdfs:comment "The Requirement to be tested."^^xsd:string .
+
+:satisfyingReportCount spin:constraint _:genid39 .
+
+_:genid39 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesCardinality
+
+:violatesCardinality a owl:NamedIndividual , spin:Function .
+# 
+# http://purl.org/net/mim/mimspin#violatesDatatypeRestriction
+
+:violatesDatatypeRestriction a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid40 .
+
+_:genid40 a sp:Ask ;
+	sp:text """ASK WHERE {
     ?arg1 mim:hasRestriction ?r .
     ?r mim:type ?t .
     BIND ((datatype(?arg2) != ?t) AS ?result) .
     FILTER (?result) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement to be tested."^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:integer .
+}"""^^xsd:string .
 
-mimspin:violatesDefaultCardinality
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:violatesCardinality ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK WHERE {
+:violatesDatatypeRestriction spin:constraint _:genid41 .
+
+_:genid41 a spl:Argument ;
+	rdfs:comment "The Requirement to be tested."^^xsd:string .
+
+:violatesDatatypeRestriction spin:constraint _:genid42 .
+
+_:genid42 a spl:Argument ;
+	rdfs:comment "The ReportSet to be tested."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesDefaultCardinality
+
+:violatesDefaultCardinality a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid43 .
+
+_:genid43 a sp:Ask ;
+	sp:text """ASK WHERE {
     ?arg2 a mim:RequirementSet .
     OPTIONAL {
         ?arg2 mim:hasRestriction ?Restr .
@@ -606,261 +788,473 @@ mimspin:violatesDefaultCardinality
         ?Restr mim:exactCardinality ?i .
     } .
     FILTER (?arg3 < 1) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement being checked."^^xsd:string ;
-                spl:predicate sp:arg3
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet being checked."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:boolean .
+}"""^^xsd:string .
 
-mimspin:violatesExactCardinality
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:violatesCardinality ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK WHERE {
+:violatesDefaultCardinality spin:constraint _:genid44 .
+
+_:genid44 a spl:Argument ;
+	rdfs:comment "The Requirement being checked."^^xsd:string .
+
+:violatesDefaultCardinality spin:constraint _:genid45 .
+
+_:genid45 a spl:Argument ;
+	rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string .
+
+:violatesDefaultCardinality spin:constraint _:genid46 .
+
+_:genid46 a spl:Argument ;
+	rdfs:comment "The ReportSet being checked."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesExactCardinality
+
+:violatesExactCardinality a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid47 .
+
+_:genid47 a sp:Ask ;
+	sp:text """ASK WHERE {
     ?arg2 a mim:RequirementSet .
     ?arg2 mim:hasRestriction ?Restr .
     ?Restr mim:onRequirement ?arg1 .
     ?Restr mim:exactCardinality ?exact .
     FILTER (?arg3 != ?exact) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement being checked."^^xsd:string ;
-                spl:predicate sp:arg3
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet being checked."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:boolean .
+}"""^^xsd:string .
 
-mimspin:violatesMaxCardinality
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:violatesCardinality ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK WHERE {
+:violatesExactCardinality spin:constraint _:genid48 .
+
+_:genid48 a spl:Argument ;
+	rdfs:comment "The Requirement being checked."^^xsd:string .
+
+:violatesExactCardinality spin:constraint _:genid49 .
+
+_:genid49 a spl:Argument ;
+	rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string .
+
+:violatesExactCardinality spin:constraint _:genid50 .
+
+_:genid50 a spl:Argument ;
+	rdfs:comment "The ReportSet being checked."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesMaxCardinality
+
+:violatesMaxCardinality a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid51 .
+
+_:genid51 a sp:Ask ;
+	sp:text """ASK WHERE {
     ?arg2 a mim:RequirementSet .
     ?arg2 mim:hasRestriction ?Restr .
     ?Restr mim:onRequirement ?arg1 .
     ?Restr mim:maxCardinality ?max .
     FILTER (?arg3 > ?max) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement being checked."^^xsd:string ;
-                spl:predicate sp:arg3
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet being checked."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:returnType xsd:boolean .
+}"""^^xsd:string .
 
-mimspin:violatesMinCardinality
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:violatesCardinality ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK WHERE {
+:violatesMaxCardinality spin:constraint _:genid52 .
+
+_:genid52 a spl:Argument ;
+	rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string .
+
+:violatesMaxCardinality spin:constraint _:genid53 .
+
+_:genid53 a spl:Argument ;
+	rdfs:comment "The Requirement being checked."^^xsd:string .
+
+:violatesMaxCardinality spin:constraint _:genid54 .
+
+_:genid54 a spl:Argument ;
+	rdfs:comment "The ReportSet being checked."^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesMinCardinality
+
+:violatesMinCardinality a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid55 .
+
+_:genid55 a sp:Ask ;
+	sp:text """ASK WHERE {
     ?arg2 a mim:RequirementSet .
     ?arg2 mim:hasRestriction ?Restr .
     ?Restr mim:onRequirement ?arg1 .
     ?Restr mim:minCardinality ?min .
     FILTER (?arg3 < ?min) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet being checked."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement being checked."^^xsd:string ;
-                spl:predicate sp:arg3
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:returnType xsd:boolean .
+}"""^^xsd:string .
 
-mimspin:violatesObjectInstanceOfRestriction
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:violatesRestriction ;
-      spin:body
-              [ rdf:type sp:Ask ;
-                sp:text """ASK WHERE {
+:violatesMinCardinality spin:constraint _:genid56 .
+
+_:genid56 a spl:Argument ;
+	rdfs:comment "The ReportSet being checked."^^xsd:string .
+
+:violatesMinCardinality spin:constraint _:genid57 .
+
+_:genid57 a spl:Argument ;
+	rdfs:comment "The Requirement being checked."^^xsd:string .
+
+:violatesMinCardinality spin:constraint _:genid58 .
+
+_:genid58 a spl:Argument ;
+	rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesObjectInstanceOfRestriction
+
+:violatesObjectInstanceOfRestriction a owl:NamedIndividual , spin:Function ;
+	spin:body _:genid59 .
+
+_:genid59 a sp:Ask ;
+	sp:text """ASK WHERE {
     ?arg1 mim:hasRestriction ?Restr .
     ?Restr mim:instanceOf ?i .
     BIND ((!<http://spinrdf.org/spl#instanceOf(?arg2, ?i)) AS ?result) .
     FILTER (?result) .
-}"""^^xsd:string
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The ReportSet being checked."^^xsd:string ;
-                spl:predicate sp:arg1
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The Requirement being checked."^^xsd:string ;
-                spl:predicate sp:arg3
-              ] ;
-      spin:constraint
-              [ rdf:type spl:Argument ;
-                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
-                spl:predicate sp:arg2
-              ] ;
-      spin:returnType xsd:boolean .
+}"""^^xsd:string .
 
-mimspin:violatesRestriction
-      rdf:type spin:Function ;
-      rdfs:subClassOf mimspin:Functions ;
-      spin:abstract "true"^^xsd:boolean .
+:violatesObjectInstanceOfRestriction spin:constraint _:genid60 .
 
-spin:onceRule
-      rdf:type spin:RuleProperty ;
-      rdfs:subPropertyOf spin:rule ;
-      spin:rulePropertyMaxIterationCount
-              1 .
+_:genid60 a spl:Argument ;
+	rdfs:comment "The ReportSet being checked."^^xsd:string .
 
-owl:Thing
-      spin:rule
-              [ rdf:type mimspin:DataReport
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:DataRequirementSatisfaction
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:ObjectRequirementSatisfaction
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:RequirementSet
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:Report
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:adequatelySastisfies
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:ReportSet
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:ContainsReport
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:Contains
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:additionallySastisfies
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:ReportSetContainsSelf
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:minimallySastisfies
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:maximallySastisfies
-              ] ;
-      spin:rule
-              [ rdf:type mimspin:Satisfies
-              ] .
+:violatesObjectInstanceOfRestriction spin:constraint _:genid61 .
 
-[]    sp:object
-              [ sp:varName "Req"^^xsd:string
-              ] ;
-      sp:predicate mim:contains ;
-      sp:subject spin:_arg1 .
+_:genid61 a spl:Argument ;
+	rdfs:comment "The Requirement being checked."^^xsd:string .
 
-[]    sp:object _:b1 ;
-      sp:predicate mim:contains ;
-      sp:subject spin:_arg2 .
+:violatesObjectInstanceOfRestriction spin:constraint _:genid62 .
 
-_:b1  sp:varName "Rep"^^xsd:string .
+_:genid62 a spl:Argument ;
+	rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string .
+# 
+# http://purl.org/net/mim/mimspin#violatesRestriction
 
-[]    sp:object _:b2 ;
-      sp:predicate mim:contains ;
-      sp:subject _:b1 .
+:violatesRestriction a owl:NamedIndividual , spin:Function .
+# 
+# http://purl.org/net/mim/ns#contains
 
-_:b2  sp:varName "DRep"^^xsd:string .
+mim:contains a owl:NamedIndividual .
+# 
+# http://spinrdf.org/spin#onceRule
 
-[]    sp:object mim:DataReport ;
-      sp:predicate rdf:type ;
-      sp:subject _:b2 .
+spin:onceRule a owl:NamedIndividual , spin:RuleProperty .
+# 
+# http://www.w3.org/2002/07/owl#Thing
 
-[]    sp:object
-              [ sp:varName "Req"^^xsd:string
-              ] ;
-      sp:predicate mim:contains ;
-      sp:subject spin:_arg1 .
+owl:Thing a owl:NamedIndividual ;
+	spin:rule _:genid63 .
 
-[]    sp:object _:b3 ;
-      sp:predicate mim:contains ;
-      sp:subject spin:_arg2 .
+_:genid63 a :DataReport .
 
-_:b3  sp:varName "Rep"^^xsd:string .
+owl:Thing spin:rule _:genid64 .
 
-[]    sp:object _:b4 ;
-      sp:predicate mim:contains ;
-      sp:subject _:b3 .
+_:genid64 a :DataRequirementSatisfaction .
 
-_:b4  sp:varName "DRep"^^xsd:string .
+owl:Thing spin:rule _:genid65 .
 
-[]    sp:object mim:DataReport ;
-      sp:predicate rdf:type ;
-      sp:subject _:b4 .
+_:genid65 a :ObjectRequirementSatisfaction .
 
-[]    sp:object
-              [ sp:varName "Req"^^xsd:string
-              ] ;
-      sp:predicate mim:contains ;
-      sp:subject spin:_arg1 .
+owl:Thing spin:rule _:genid66 .
 
-[]    sp:object _:b5 ;
-      sp:predicate mim:contains ;
-      sp:subject spin:_arg2 .
+_:genid66 a :RequirementSet .
 
-_:b5  sp:varName "Rep"^^xsd:string .
+owl:Thing spin:rule _:genid67 .
 
-[]    sp:object _:b6 ;
-      sp:predicate mim:contains ;
-      sp:subject _:b5 .
+_:genid67 a :Report .
 
-_:b6  sp:varName "DRep"^^xsd:string .
+owl:Thing spin:rule _:genid68 .
 
-[]    sp:object mim:DataReport ;
-      sp:predicate rdf:type ;
-      sp:subject _:b6 .
+_:genid68 a :adequatelySastisfies .
+
+owl:Thing spin:rule _:genid69 .
+
+_:genid69 a :ReportSet .
+
+owl:Thing spin:rule _:genid70 .
+
+_:genid70 a :ContainsReport .
+
+owl:Thing spin:rule _:genid71 .
+
+_:genid71 a :Contains .
+
+owl:Thing spin:rule _:genid72 .
+
+_:genid72 a :additionallySastisfies .
+
+owl:Thing spin:rule _:genid73 .
+
+_:genid73 a :ReportSetContainsSelf .
+
+owl:Thing spin:rule _:genid74 .
+
+_:genid74 a :minimallySastisfies .
+
+owl:Thing spin:rule _:genid75 .
+
+_:genid75 a :maximallySastisfies .
+
+owl:Thing spin:rule _:genid76 .
+
+_:genid76 a :Satisfies .
+# 
+
+_:genid77 spl:predicate sp:arg1 .
+
+_:genid78 spl:predicate sp:arg2 .
+
+_:genid79 spl:predicate sp:arg2 .
+
+_:genid80 spl:predicate sp:arg1 .
+
+_:genid81 spl:predicate sp:arg2 .
+
+_:genid82 spl:predicate sp:arg1 .
+
+_:genid83 spl:predicate sp:arg1 .
+
+_:genid84 spl:predicate sp:arg2 .
+
+_:genid85 spl:predicate sp:arg2 .
+
+_:genid86 spl:predicate sp:arg1 .
+
+_:genid87 spl:predicate sp:arg3 .
+
+_:genid88 spl:predicate sp:arg1 .
+
+_:genid89 spl:predicate sp:arg2 .
+
+_:genid90 spl:predicate sp:arg2 .
+
+_:genid91 spl:predicate sp:arg1 .
+
+_:genid92 spl:predicate sp:arg2 .
+
+_:genid93 spl:predicate sp:arg1 .
+
+_:genid94 spl:predicate sp:arg2 .
+
+_:genid95 spl:predicate sp:arg1 .
+
+_:genid96 spl:predicate sp:arg3 .
+
+_:genid97 spl:predicate sp:arg2 .
+
+_:genid98 spl:predicate sp:arg1 .
+
+_:genid99 spl:predicate sp:arg3 .
+
+_:genid100 spl:predicate sp:arg2 .
+
+_:genid101 spl:predicate sp:arg1 .
+
+_:genid102 spl:predicate sp:arg2 .
+
+_:genid103 spl:predicate sp:arg3 .
+
+_:genid104 spl:predicate sp:arg1 .
+
+_:genid105 spl:predicate sp:arg1 .
+
+_:genid106 spl:predicate sp:arg3 .
+
+_:genid107 spl:predicate sp:arg2 .
+
+_:genid108 spl:predicate sp:arg1 .
+
+_:genid109 spl:predicate sp:arg3 .
+
+_:genid110 spl:predicate sp:arg2 .
+
+_:genid111 sp:object _:genid112 .
+
+_:genid112 sp:varName "Req"^^xsd:string .
+
+_:genid113 sp:object _:genid114 .
+
+_:genid114 sp:varName "Rep"^^xsd:string .
+
+_:genid115 sp:object _:genid116 .
+
+_:genid116 sp:varName "DRep"^^xsd:string .
+
+_:genid117 sp:object mim:DataReport .
+
+_:genid118 sp:object _:genid119 .
+
+_:genid119 sp:varName "Req"^^xsd:string .
+
+_:genid120 sp:object _:genid121 .
+
+_:genid121 sp:varName "Rep"^^xsd:string .
+
+_:genid122 sp:object _:genid123 .
+
+_:genid123 sp:varName "DRep"^^xsd:string .
+
+_:genid124 sp:object mim:DataReport .
+
+_:genid125 sp:object _:genid126 .
+
+_:genid126 sp:varName "Req"^^xsd:string .
+
+_:genid127 sp:object _:genid128 .
+
+_:genid128 sp:varName "Rep"^^xsd:string .
+
+_:genid129 sp:object _:genid130 .
+
+_:genid130 sp:varName "DRep"^^xsd:string .
+
+_:genid131 sp:object mim:DataReport .
+
+_:genid132 sp:predicate mim:contains ;
+	sp:subject _:genid114 .
+
+_:genid133 sp:predicate mim:contains ;
+	sp:subject spin:_arg2 .
+
+_:genid134 sp:predicate rdf:type ;
+	sp:subject _:genid116 .
+
+_:genid135 sp:predicate mim:contains ;
+	sp:subject spin:_arg1 .
+
+_:genid136 sp:predicate mim:contains ;
+	sp:subject spin:_arg1 .
+
+_:genid137 sp:predicate mim:contains ;
+	sp:subject _:genid121 .
+
+_:genid138 sp:predicate rdf:type ;
+	sp:subject _:genid123 .
+
+_:genid139 sp:predicate mim:contains ;
+	sp:subject spin:_arg2 .
+
+_:genid140 sp:predicate mim:contains ;
+	sp:subject _:genid128 .
+
+_:genid141 sp:predicate rdf:type ;
+	sp:subject _:genid130 .
+
+_:genid142 sp:predicate mim:contains ;
+	sp:subject spin:_arg1 .
+
+_:genid143 sp:predicate mim:contains ;
+	sp:subject spin:_arg2 .
+# 
+# 
+# #################################################################
+# #
+# #    Annotations
+# #
+# #################################################################
+# 
+# 
+
+:ChecklistSatisfaction spin:abstract "true"^^xsd:boolean .
+# 
+
+:ConstructTemplates spin:abstract "true"^^xsd:boolean .
+# 
+
+:Contains spin:labelTemplate "MIMSPIN: Contains inference"^^xsd:string .
+# 
+
+:ContainsReport spin:labelTemplate "MIMSPIN: Contains Report inference"^^xsd:string .
+# 
+
+:DataReport spin:labelTemplate "MIMSPIN: DataReport inference"^^xsd:string .
+# 
+
+:DataRequirementSatisfaction rdfs:comment "Requirement Satisfaction"^^xsd:string ;
+	spin:labelTemplate "MiMSPIN : DataRequirementSatisfaction"^^xsd:string .
+# 
+
+:Functions spin:abstract "true"^^xsd:boolean .
+# 
+
+:ObjectRequirementSatisfaction spin:labelTemplate "MIMSPIN : ObjectRequirementSatisfaction"^^xsd:string ;
+	rdfs:comment "Requirement Satisfaction"^^xsd:string .
+# 
+
+:Report spin:labelTemplate "MIMSPIN: Report inference"^^xsd:string .
+# 
+
+:ReportSet spin:labelTemplate "MIMSPIN: ReportSet inference"^^xsd:string .
+# 
+
+:ReportSetContainsSelf spin:labelTemplate "MIMSPIN: ReportSet-contains-Self"^^xsd:string .
+# 
+
+:RequirementSet spin:labelTemplate "MIMSPIN: RequirementSet inference"^^xsd:string .
+# 
+
+:RequirementSetSatisfaction spin:abstract "true"^^xsd:boolean .
+# 
+
+:Satisfies spin:labelTemplate "MIMSPIN: Contains inference"^^xsd:string .
+# 
+
+:additionallySastisfies spin:labelTemplate "MIMSPIN : AdditionallySatisfies"^^xsd:string ;
+	rdfs:comment "Additionally Satisfies"^^xsd:string .
+# 
+
+:adequatelySastisfies rdfs:comment "Adequately Satisfies"^^xsd:string .
+# 
+
+:hasUnsatisfied spin:abstract "true"^^xsd:boolean .
+# 
+
+:hasUnsatisfiedMustRequirement spin:returnType xsd:integer .
+# 
+
+:hasUnsatisfiedMustRequirement_1 spin:returnType xsd:integer .
+# 
+
+:hasUnsatisfiedOptionalRequirement spin:returnType xsd:integer .
+# 
+
+:hasUnsatisfiedRequirement spin:returnType xsd:integer .
+# 
+
+:hasUnsatisfiedShouldRequirement spin:returnType xsd:integer .
+# 
+
+:maximallySastisfies rdfs:comment "Maximally Satisfies"^^xsd:string .
+# 
+
+:minimallySastisfies rdfs:comment "Minimally Satisfies"^^xsd:string .
+# 
+
+:missingAdequatelySatisfyingChild spin:returnType xsd:integer .
+# 
+
+:reportCount spin:returnType xsd:integer .
+# 
+
+:satisfyingReportCount spin:returnType xsd:integer .
+# 
+
+:violatesCardinality spin:abstract "true"^^xsd:boolean .
+# 
+
+:violatesDatatypeRestriction spin:returnType xsd:integer .
+# 
+
+:violatesDefaultCardinality spin:returnType xsd:boolean .
+# 
+
+:violatesExactCardinality spin:returnType xsd:boolean .
+# 
+
+:violatesMaxCardinality spin:returnType xsd:boolean .
+# 
+
+:violatesMinCardinality spin:returnType xsd:boolean .
+# 
+
+:violatesObjectInstanceOfRestriction spin:returnType xsd:boolean .
+# 
+
+:violatesRestriction spin:abstract "true"^^xsd:boolean .
+# 
+
+spin:onceRule spin:rulePropertyMaxIterationCount "1"^^xsd:integer .
+# 
+# Generated by the OWL API (version 4.1.3.20151118-2017) https://github.com/owlcs/owlapi
