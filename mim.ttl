@@ -1,0 +1,259 @@
+@prefix :        <http://purl.org/net/mim/ns#> .
+@prefix dc:      <http://purl.org/dc/elements/1.1/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix owl2xml:  <http://www.w3.org/2006/12/owl2-xml#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+dc:creator
+      rdf:type owl:AnnotationProperty .
+
+<http://purl.org/net/mim/ns>
+      rdf:type owl:Ontology ;
+      dc:creator "Matthew Gamble" .
+
+:Condition
+      rdf:type owl:Class ;
+      rdfs:subClassOf owl:Thing .
+
+:DataReport
+      rdf:type owl:Class ;
+      rdfs:subClassOf :Report ;
+      owl:equivalentClass
+              [ rdf:type owl:Restriction ;
+                owl:onProperty :reports ;
+                owl:someValuesFrom :DataRequirement
+              ] .
+
+:DataRequirement
+      rdf:type owl:Class ;
+      rdfs:subClassOf :Requirement .
+
+:MIM  rdf:type owl:Class ;
+      rdfs:comment "Model identifies the top level Minimum Information Model that is being defined."@en ;
+      rdfs:subClassOf :ReportSet ;
+      owl:equivalentClass
+              [ rdf:type owl:Restriction ;
+                owl:onProperty :hasRequirement ;
+                owl:someValuesFrom :Requirement
+              ] .
+
+:ObjectReport
+      rdf:type owl:Class ;
+      rdfs:subClassOf :Report ;
+      owl:equivalentClass
+              [ rdf:type owl:Restriction ;
+                owl:onProperty :reports ;
+                owl:someValuesFrom :ObjectRequirement
+              ] .
+
+:ObjectRequirement
+      rdf:type owl:Class ;
+      rdfs:subClassOf :Requirement .
+
+:Report
+      rdf:type owl:Class ;
+      rdfs:comment "A Report identifies the instance of an attempt to report a requirement in a minimum information model. A report must indicate the requirement that it reports." ;
+      owl:equivalentClass
+              [] .
+
+:ReportSet
+      rdf:type owl:Class ;
+      owl:equivalentClass
+              [ rdf:type owl:restriction ;
+                owl:hasSelf "true"^^xsd:boolean ;
+                owl:onProperty :contains
+              ] .
+
+:Requirement
+      rdf:type owl:Class ;
+      rdfs:comment "A requirement is an atomic reporting requirement for a minimum information model."@en .
+
+:RequirementSet
+      rdf:type owl:Class .
+
+:Restriction
+      rdf:type owl:Class ;
+      rdfs:subClassOf owl:Thing .
+
+:Rule
+      rdf:type owl:Class .
+
+:additionallySatisfies
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :satisfies .
+
+:adequatelySatisfies
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :satisfies .
+
+:cardinality
+      rdf:type owl:DatatypeProperty .
+
+:contains
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:containsDataReport
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Report ;
+      rdfs:range :DataReport ;
+      rdfs:subPropertyOf :containsReport .
+
+:containsReport
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :ReportSet ;
+      rdfs:range :Report ;
+      rdfs:subPropertyOf :contains .
+
+:containsReportSet
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :ReportSet ;
+      rdfs:range :ReportSet ;
+      rdfs:subPropertyOf :contains .
+
+:directInstanceOf
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range rdfs:Class ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:directSubclassOf
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range rdfs:Class ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:exactCardinality
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range xsd:positiveInteger ;
+      rdfs:subPropertyOf :cardinality .
+
+:hasMustRequirement
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :hasRequirement .
+
+:hasOptionalRequirement
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :hasRequirement .
+
+:hasRequirement
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :RequirementSet ;
+      rdfs:range :Requirement , :RequirementSet ;
+      rdfs:subPropertyOf :contains .
+
+:hasRestriction
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :RequirementSet , :Requirement ;
+      rdfs:range :Restriction ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:hasShouldRequirement
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :hasRequirement .
+
+:identifies
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Rule ;
+      rdfs:range :Requirement ;
+      rdfs:subPropertyOf owl:topObjectProperty ;
+      owl:inverseOf :isIdentifiedBy .
+
+:instanceOf
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range rdfs:Class ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:isConditionalUpon
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range :Condition ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:isIdentifiedBy
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Requirement ;
+      rdfs:range :Rule ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:isReportedBy
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty ;
+      owl:inverseOf :reports .
+
+:isSatisfiedBy
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:maxCardinality
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range xsd:positiveInteger ;
+      rdfs:subPropertyOf :cardinality .
+
+:maximallySatisfies
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :satisfies .
+
+:minCardinality
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range xsd:positiveInteger ;
+      rdfs:subPropertyOf :cardinality .
+
+:minimallySatisfies
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf :satisfies .
+
+:onRequirement
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range :Requirement , :RequirementSet ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:onSelf
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range xsd:boolean .
+
+:partOf
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Requirement ;
+      rdfs:range :RequirementSet ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:reports
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :ReportSet , :Report ;
+      rdfs:range :RequirementSet , :Requirement ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:satisfies
+      rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:subClassOf
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range rdfs:Class ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:type
+      rdf:type owl:ObjectProperty ;
+      rdfs:domain :Restriction ;
+      rdfs:range rdfs:Datatype ;
+      rdfs:subPropertyOf owl:topObjectProperty .
+
+:withValue
+      rdf:type owl:DatatypeProperty ;
+      rdfs:domain :DataReport .
+
+owl:Thing
+      rdf:type owl:Class .
+
+owl:topObjectProperty
+      rdf:type owl:ObjectProperty .

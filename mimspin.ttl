@@ -1,0 +1,866 @@
+# baseURI: http://purl.org/net/mim/mimspin
+# imports: http://purl.org/net/mim/ns
+# imports: http://spinrdf.org/spin
+# imports: http://spinrdf.org/spl
+
+@prefix :        <http://purl.org/net/mim/mimspin#> .
+@prefix fn:      <http://www.w3.org/2005/xpath-functions#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix mim:     <http://purl.org/net/mim/ns#> .
+@prefix mimspin:  <http://purl.org/net/mim/mimspin#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sp:      <http://spinrdf.org/sp#> .
+@prefix spin:    <http://spinrdf.org/spin#> .
+@prefix spl:     <http://spinrdf.org/spl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/net/mim/mimspin>
+      rdf:type owl:Ontology ;
+      owl:imports <http://spinrdf.org/spin> , <http://purl.org/net/mim/ns> , <http://spinrdf.org/spl> ;
+      owl:versionInfo "Created with TopBraid Composer"^^xsd:string .
+
+mimspin:ChecklistSatisfaction
+      rdf:type spin:ConstructTemplate ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:abstract "true"^^xsd:boolean .
+
+mimspin:ConstructTemplates
+      rdf:type spin:ConstructTemplate ;
+      rdfs:subClassOf spin:ConstructTemplates ;
+      spin:abstract "true"^^xsd:boolean .
+
+mimspin:Contains
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x mim:contains ?y .
+}
+WHERE {
+    ?x (mim:containsReport|mim:containsReportSet)|mim:containsDataReport ?y .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: Contains inference"^^xsd:string .
+
+mimspin:ContainsReport
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x mim:containsReport ?y .
+}
+WHERE {
+    ?x mim:containsDataReport ?y .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: Contains Report inference"^^xsd:string .
+
+mimspin:DataReport
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x a mim:DataReport .
+}
+WHERE {
+    ?x mim:reports ?y .
+    ?x mim:withValue ?value .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: DataReport inference"^^xsd:string .
+
+mimspin:DataRequirementSatisfaction
+      rdf:type spin:ConstructTemplate ;
+      rdfs:comment "Requirement Satisfaction"^^xsd:string ;
+      rdfs:subClassOf mimspin:RequirementSatisfaction ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """# DataReport satisfies DataRequirement
+CONSTRUCT {
+    ?z mim:satisfies ?y .
+}
+WHERE {
+    ?x a mim:ReportSet .
+    ?y a mim:DataRequirement .
+    ?x mim:containsDataReport ?z .
+    ?z mim:reports ?y .
+    ?z mim:withValue ?v .
+    BIND (mimspin:violatesDatatypeRestriction(?y, ?v) AS ?result) .
+    FILTER (!?result) .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MiMSPIN : DataRequirementSatisfaction"^^xsd:string .
+
+mimspin:Functions
+      rdf:type spin:Function ;
+      rdfs:subClassOf spin:Functions ;
+      spin:abstract "true"^^xsd:boolean .
+
+mimspin:ObjectRequirementSatisfaction
+      rdf:type spin:ConstructTemplate ;
+      rdfs:comment "Requirement Satisfaction"^^xsd:string ;
+      rdfs:subClassOf mimspin:RequirementSatisfaction ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """# ObjectReport satisfies ObjectRequirement : FIX type check!
+CONSTRUCT {
+    ?x mim:satisfies ?y .
+}
+WHERE {
+    ?x a mim:Report .
+    ?y a mim:ObjectRequirement .
+    ?x mim:reports ?y .
+    FILTER (!mimspin:violatesObjectInstanceOfRestriction(?y, ?x)) .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN : ObjectRequirementSatisfaction"^^xsd:string .
+
+mimspin:Report
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x a mim:Report .
+}
+WHERE {
+    ?x mim:reports ?y .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: Report inference"^^xsd:string .
+
+mimspin:ReportSet
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x a mim:ReportSet .
+}
+WHERE {
+    ?x mim:contains ?y .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: ReportSet inference"^^xsd:string .
+
+mimspin:ReportSetContainsSelf
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?this mim:contains ?this .
+}
+WHERE {
+    ?this a mim:ReportSet .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: ReportSet-contains-Self"^^xsd:string .
+
+mimspin:RequirementSatisfaction
+      rdf:type spin:ConstructTemplate ;
+      rdfs:subClassOf mimspin:ChecklistSatisfaction .
+
+mimspin:RequirementSet
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x a mim:RequirementSet .
+}
+WHERE {
+    ?x a mim:MIC .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: RequirementSet inference"^^xsd:string .
+
+mimspin:RequirementSetSatisfaction
+      rdf:type spin:ConstructTemplate ;
+      rdfs:subClassOf mimspin:ChecklistSatisfaction ;
+      spin:abstract "true"^^xsd:boolean .
+
+mimspin:Satisfies
+      rdf:type spin:Template ;
+      rdfs:subClassOf mimspin:ConstructTemplates ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x mim:satisfies ?y .
+}
+WHERE {
+    ?x ((mim:minimallySatisfies|mim:additionallySatisfies)|mim:adequatelySatisfies)|mim:maximallySatisfies ?y .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN: Contains inference"^^xsd:string .
+
+mimspin:additionallySastisfies
+      rdf:type spin:ConstructTemplate ;
+      rdfs:comment "Additionally Satisfies"^^xsd:string ;
+      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?arg1 mim:additionallySatisfies ?arg2 .
+}
+WHERE {
+    ?arg1 a mim:ReportSet .
+    ?arg2 a mim:RequirementSet .
+    ?arg1 mim:minimallySatisfies ?arg2 .
+    OPTIONAL {
+        ?arg2 mim:hasOptionalRequirement ?req .
+        ?arg1 mim:satisfies ?req .
+    } .
+    OPTIONAL {
+        ?arg2 mim:hasShouldRequirement ?req .
+        ?arg1 mim:satisfies ?req .
+    } .
+    FILTER bound(?req) .
+}"""^^xsd:string
+              ] ;
+      spin:labelTemplate "MIMSPIN : AdditionallySatisfies"^^xsd:string .
+
+mimspin:adequatelySastisfies
+      rdf:type spin:ConstructTemplate ;
+      rdfs:comment "Adequately Satisfies"^^xsd:string ;
+      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?arg1 mim:adequatelySatisfies ?arg2 .
+    ?x mim:should ?should .
+    ?x mim:adequate ?adequate .
+}
+WHERE {
+    ?arg1 a mim:ReportSet .
+    ?arg2 a mim:RequirementSet .
+    ?arg1 mim:minimallySatisfies ?arg2 .
+    BIND ((!mimspin:hasUnsatisfiedShouldRequirement(?arg2, ?arg1)) AS ?should) .
+    FILTER (?should) .
+    BIND ((!mimspin:missingAdequatelySatisfyingChild(?arg2, ?arg1, mim:adequatelySatisfies)) AS ?adequate) .
+    FILTER (?adequate) .
+}"""^^xsd:string
+              ] .
+
+mimspin:hasUnsatisfied
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:Functions ;
+      spin:abstract "true"^^xsd:boolean .
+
+mimspin:hasUnsatisfiedMustRequirement
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:hasUnsatisfied ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """# is there animmediate must requirement in ReqSet that is violated the by RepSet ?
+ASK WHERE {
+    ?arg1 mim:hasMustRequirement ?Req .
+    BIND (mimspin:reportCount(?arg2, ?Req) AS ?rc) .
+    BIND (mimspin:satisfyingReportCount(?arg2, ?Req) AS ?sc) .
+    BIND (mimspin:violatesMaxCardinality(?Req, ?arg1, ?rc) AS ?max) .
+    BIND (mimspin:violatesMinCardinality(?Req, ?arg1, ?rc) AS ?min) .
+    BIND (mimspin:violatesExactCardinality(?Req, ?arg1, ?rc) AS ?exact) .
+    BIND (mimspin:violatesMaxCardinality(?Req, ?arg1, ?sc) AS ?smax) .
+    BIND (mimspin:violatesMinCardinality(?Req, ?arg1, ?sc) AS ?smin) .
+    BIND (mimspin:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact) .
+    BIND (mimspin:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default) .
+    FILTER ((((((?max || ?min) || ?exact) || ?smax) || ?smin) || ?sexact) || ?default) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The MIM to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:hasUnsatisfiedMustRequirement_1
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:hasUnsatisfied ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """# is there animmediate must requirement in ReqSet that is violated the by RepSet ?
+ASK WHERE {
+    ?arg1 mim:hasMustRequirement ?Req .
+    BIND (:reportCount(?arg2, ?Req) AS ?rc) .
+    BIND (mimspin:satisfyingReportCount(?arg2, ?Req) AS ?sc) .
+    BIND (mimspin:violatesMaxCardinality(?Req, ?arg1, ?rc) AS ?max) .
+    BIND (mimspin:violatesMinCardinality(?Req, ?arg1, ?rc) AS ?min) .
+    BIND (mimspin:violatesExactCardinality(?Req, ?arg1, ?rc) AS ?exact) .
+    BIND (mimspin:violatesMaxCardinality(?Req, ?arg1, ?sc) AS ?smax) .
+    BIND (mimspin:violatesMinCardinality(?Req, ?arg1, ?sc) AS ?smin) .
+    BIND (mimspin:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact) .
+    BIND (mimspin:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default) .
+    FILTER ((((((?max || ?min) || ?exact) || ?smax) || ?smin) || ?sexact) || ?default) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The MIM to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:hasUnsatisfiedOptionalRequirement
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:hasUnsatisfied ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK
+WHERE
+  { ?arg1 mim:hasOptionalRequirement ?Req
+    BIND(:reportCount(?arg2, ?Req) AS ?rc)
+    BIND(:satisfyingReportCount(?arg2, ?Req) AS ?sc)
+    BIND(:violatesMaxCardinality(?Req, ?arg1, ?rc) AS ?max)
+    BIND(:violatesMinCardinality(?Req, ?arg1, ?rc) AS ?min)
+    BIND(:violatesExactCardinality(?Req, ?arg1, ?rc) AS ?exact)
+    BIND(:violatesMaxCardinality(?Req, ?arg1, ?sc) AS ?smax)
+    BIND(:violatesMinCardinality(?Req, ?arg1, ?sc) AS ?smin)
+    BIND(:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact)
+    BIND(:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default)
+    FILTER ( ( ( ( ( ( ?max || ?min ) || ?exact ) || ?smax ) || ?smin ) || ?sexact ) || ?default )
+  }"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The MIM to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:hasUnsatisfiedRequirement
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:hasUnsatisfied ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK
+WHERE
+  { ?arg1 mim:contains ?Req
+    BIND(:reportCount(?arg2, ?Req) AS ?rc)
+    BIND(:satisfyingReportCount(?arg2, ?Req) AS ?sc)
+    BIND(:violatesMaxCardinality(?Req, ?arg1, ?rc) AS ?max)
+    BIND(:violatesMinCardinality(?Req, ?arg1, ?rc) AS ?min)
+    BIND(:violatesExactCardinality(?Req, ?arg1, ?rc) AS ?exact)
+    BIND(:violatesMaxCardinality(?Req, ?arg1, ?sc) AS ?smax)
+    BIND(:violatesMinCardinality(?Req, ?arg1, ?sc) AS ?smin)
+    BIND(:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact)
+    BIND(:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default)
+    FILTER ( ( ( ( ( ( ?max || ?min ) || ?exact ) || ?smax ) || ?smin ) || ?sexact ) || ?default )
+  }"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The MIM to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:hasUnsatisfiedShouldRequirement
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:hasUnsatisfied ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """
+ASK
+WHERE
+  { ?arg1 mim:hasShouldRequirement ?Req
+    BIND(:reportCount(?arg2, ?Req) AS ?rc)
+    BIND(:satisfyingReportCount(?arg2, ?Req) AS ?sc)
+    BIND(:violatesMaxCardinality(?Req, ?arg1, ?rc) AS ?max)
+    BIND(:violatesMinCardinality(?Req, ?arg1, ?rc) AS ?min)
+    BIND(:violatesExactCardinality(?Req, ?arg1, ?rc) AS ?exact)
+    BIND(:violatesMaxCardinality(?Req, ?arg1, ?sc) AS ?smax)
+    BIND(:violatesMinCardinality(?Req, ?arg1, ?sc) AS ?smin)
+    BIND(:violatesExactCardinality(?Req, ?arg1, ?sc) AS ?sexact)
+    BIND(:violatesDefaultCardinality(?Req, ?arg1, ?sc) AS ?default)
+    FILTER ( ( ( ( ( ( ?max || ?min ) || ?exact ) || ?smax ) || ?smin ) || ?sexact ) || ?default )
+  }
+"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The MIM to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:maximallySastisfies
+      rdf:type spin:ConstructTemplate ;
+      rdfs:comment "Maximally Satisfies"^^xsd:string ;
+      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?x mim:maximallySatisfies ?y .
+    ?x mim:must ?must .
+    ?x mim:should ?should .
+    ?x mim:optional ?optional .
+}
+WHERE {
+    ?x a mim:ReportSet .
+    ?y a mim:RequirementSet .
+    ?x mim:reports ?y .
+    BIND ((!mimspin:hasUnsatisfiedMustRequirement(?y, ?x)) AS ?must) .
+    BIND ((!mimspin:hasUnsatisfiedShouldRequirement(?y, ?x)) AS ?should) .
+    BIND ((!mimspin:hasUnsatisfiedOptionalRequirement(?y, ?x)) AS ?optional) .
+    FILTER ((?must && ?should) && ?optional) .
+    BIND ((!mimspin:missingAdequatelySatisfyingChild(?y, ?x, mim:maximallySatisfies)) AS ?adequate) .
+    FILTER (?adequate) .
+}"""^^xsd:string
+              ] .
+
+mimspin:minimallySastisfies
+      rdf:type spin:ConstructTemplate ;
+      rdfs:comment "Minimally Satisfies"^^xsd:string ;
+      rdfs:subClassOf mimspin:RequirementSetSatisfaction ;
+      spin:body
+              [ rdf:type sp:Construct ;
+                sp:text """CONSTRUCT {
+    ?reportSet mim:minimallySatisfies ?requirementSet .
+}
+WHERE {
+    ?reportSet a mim:ReportSet .
+    ?requirementSet a mim:RequirementSet .
+    ?reportSet mim:reports ?requirementSet .
+    BIND ((!mimspin:hasUnsatisfiedMustRequirement(?requirementSet, ?reportSet)) AS ?result) .
+    FILTER (?result) .
+}"""^^xsd:string
+              ] .
+
+mimspin:missingAdequatelySatisfyingChild
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:Functions ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """# is there an immediate  requirement in ReqSet that isnt {?arg3} satisfied the by RepSet ?
+ASK WHERE {
+    ?arg1 a mim:RequirementSet .
+    ?arg2 a mim:ReportSet .
+    ?arg2 mim:reports ?arg1 .
+    ?arg2 mim:contains ?SubRepSet .
+    ?SubRepSet a mim:ReportSet .
+    ?arg1 ((mim:hasMustRequirement|mim:hasShouldRequirement)|mim:hasOptionalRequirement)|mim:hasRequirement ?SubReqSet .
+    ?SubReqSet a mim:RequirementSet .
+    ?SubRepSet mim:reports ?SubReqSet .
+    FILTER (?SubReqSet != ?arg1) .
+    MINUS {
+        ?SubRepSet ?arg3 ?SubReqSet .
+    } .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                spl:predicate sp:arg3
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The MIM to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:reportCount
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:Functions ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:text """SELECT COUNT(DISTINCT ?report)
+WHERE {
+    OPTIONAL {
+        ?arg1 mim:contains ?report .
+        ?report mim:reports ?arg2 .
+    } .
+    OPTIONAL {
+        ?arg1 (mim:contains)* ?z .
+        ?z mim:reports ?arg2 .
+        ?z mim:withValue ?report .
+    } .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:satisfyingReportCount
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:Functions ;
+      spin:body
+              [ rdf:type sp:Select ;
+                sp:text """# ReportSet reports Requirement count
+SELECT COUNT(DISTINCT ?report)
+WHERE {
+    ?arg1 a mim:ReportSet .
+    OPTIONAL {
+        ?arg1 mim:contains ?report .
+        ?report mim:satisfies ?arg2 .
+    } .
+    OPTIONAL {
+        ?arg1 (mim:contains)* ?report .
+        ?report mim:satisfies ?arg2 .
+        ?report mim:withValue ?v .
+    } .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:violatesCardinality
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:Functions ;
+      spin:abstract "true"^^xsd:boolean .
+
+mimspin:violatesDatatypeRestriction
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:violatesRestriction ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK WHERE {
+    ?arg1 mim:hasRestriction ?r .
+    ?r mim:type ?t .
+    BIND ((datatype(?arg2) != ?t) AS ?result) .
+    FILTER (?result) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement to be tested."^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet to be tested."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:integer .
+
+mimspin:violatesDefaultCardinality
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:violatesCardinality ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK WHERE {
+    ?arg2 a mim:RequirementSet .
+    OPTIONAL {
+        ?arg2 mim:hasRestriction ?Restr .
+        ?Restr mim:onRequirement ?arg1 .
+    } .
+    MINUS {
+        ?Restr mim:maxCardinality ?i .
+    } .
+    MINUS {
+        ?Restr mim:minCardinality ?i .
+    } .
+    MINUS {
+        ?Restr mim:exactCardinality ?i .
+    } .
+    FILTER (?arg3 < 1) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement being checked."^^xsd:string ;
+                spl:predicate sp:arg3
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet being checked."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:boolean .
+
+mimspin:violatesExactCardinality
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:violatesCardinality ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK WHERE {
+    ?arg2 a mim:RequirementSet .
+    ?arg2 mim:hasRestriction ?Restr .
+    ?Restr mim:onRequirement ?arg1 .
+    ?Restr mim:exactCardinality ?exact .
+    FILTER (?arg3 != ?exact) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement being checked."^^xsd:string ;
+                spl:predicate sp:arg3
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet being checked."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:boolean .
+
+mimspin:violatesMaxCardinality
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:violatesCardinality ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK WHERE {
+    ?arg2 a mim:RequirementSet .
+    ?arg2 mim:hasRestriction ?Restr .
+    ?Restr mim:onRequirement ?arg1 .
+    ?Restr mim:maxCardinality ?max .
+    FILTER (?arg3 > ?max) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement being checked."^^xsd:string ;
+                spl:predicate sp:arg3
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet being checked."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:returnType xsd:boolean .
+
+mimspin:violatesMinCardinality
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:violatesCardinality ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK WHERE {
+    ?arg2 a mim:RequirementSet .
+    ?arg2 mim:hasRestriction ?Restr .
+    ?Restr mim:onRequirement ?arg1 .
+    ?Restr mim:minCardinality ?min .
+    FILTER (?arg3 < ?min) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet being checked."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement being checked."^^xsd:string ;
+                spl:predicate sp:arg3
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:returnType xsd:boolean .
+
+mimspin:violatesObjectInstanceOfRestriction
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:violatesRestriction ;
+      spin:body
+              [ rdf:type sp:Ask ;
+                sp:text """ASK WHERE {
+    ?arg1 mim:hasRestriction ?Restr .
+    ?Restr mim:instanceOf ?i .
+    BIND ((!<http://spinrdf.org/spl#instanceOf(?arg2, ?i)) AS ?result) .
+    FILTER (?result) .
+}"""^^xsd:string
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The ReportSet being checked."^^xsd:string ;
+                spl:predicate sp:arg1
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The Requirement being checked."^^xsd:string ;
+                spl:predicate sp:arg3
+              ] ;
+      spin:constraint
+              [ rdf:type spl:Argument ;
+                rdfs:comment "The number of times this ReportSet reports the Requirement"^^xsd:string ;
+                spl:predicate sp:arg2
+              ] ;
+      spin:returnType xsd:boolean .
+
+mimspin:violatesRestriction
+      rdf:type spin:Function ;
+      rdfs:subClassOf mimspin:Functions ;
+      spin:abstract "true"^^xsd:boolean .
+
+spin:onceRule
+      rdf:type spin:RuleProperty ;
+      rdfs:subPropertyOf spin:rule ;
+      spin:rulePropertyMaxIterationCount
+              1 .
+
+owl:Thing
+      spin:rule
+              [ rdf:type mimspin:DataReport
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:DataRequirementSatisfaction
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:ObjectRequirementSatisfaction
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:RequirementSet
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:Report
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:adequatelySastisfies
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:ReportSet
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:ContainsReport
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:Contains
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:additionallySastisfies
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:ReportSetContainsSelf
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:minimallySastisfies
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:maximallySastisfies
+              ] ;
+      spin:rule
+              [ rdf:type mimspin:Satisfies
+              ] .
+
+[]    sp:object
+              [ sp:varName "Req"^^xsd:string
+              ] ;
+      sp:predicate mim:contains ;
+      sp:subject spin:_arg1 .
+
+[]    sp:object _:b1 ;
+      sp:predicate mim:contains ;
+      sp:subject spin:_arg2 .
+
+_:b1  sp:varName "Rep"^^xsd:string .
+
+[]    sp:object _:b2 ;
+      sp:predicate mim:contains ;
+      sp:subject _:b1 .
+
+_:b2  sp:varName "DRep"^^xsd:string .
+
+[]    sp:object mim:DataReport ;
+      sp:predicate rdf:type ;
+      sp:subject _:b2 .
+
+[]    sp:object
+              [ sp:varName "Req"^^xsd:string
+              ] ;
+      sp:predicate mim:contains ;
+      sp:subject spin:_arg1 .
+
+[]    sp:object _:b3 ;
+      sp:predicate mim:contains ;
+      sp:subject spin:_arg2 .
+
+_:b3  sp:varName "Rep"^^xsd:string .
+
+[]    sp:object _:b4 ;
+      sp:predicate mim:contains ;
+      sp:subject _:b3 .
+
+_:b4  sp:varName "DRep"^^xsd:string .
+
+[]    sp:object mim:DataReport ;
+      sp:predicate rdf:type ;
+      sp:subject _:b4 .
+
+[]    sp:object
+              [ sp:varName "Req"^^xsd:string
+              ] ;
+      sp:predicate mim:contains ;
+      sp:subject spin:_arg1 .
+
+[]    sp:object _:b5 ;
+      sp:predicate mim:contains ;
+      sp:subject spin:_arg2 .
+
+_:b5  sp:varName "Rep"^^xsd:string .
+
+[]    sp:object _:b6 ;
+      sp:predicate mim:contains ;
+      sp:subject _:b5 .
+
+_:b6  sp:varName "DRep"^^xsd:string .
+
+[]    sp:object mim:DataReport ;
+      sp:predicate rdf:type ;
+      sp:subject _:b6 .

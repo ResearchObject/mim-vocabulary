@@ -1,0 +1,86 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wikiprov: <http://purl.org/net/wikiprov#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix evident: <http://purl.org/net/evident#> .
+
+wikiprov:United_States_National_Forest_223449
+    wikiprov:id "223449"^^xsd:string ;
+    wikiprov:pageid "42653"^^xsd:string ;
+    wikiprov:revid "223449"^^xsd:string ;
+    wikiprov:title "United_States_National_Forest"^^xsd:string ;
+    a prov:Entity, wikiprov:article .
+
+wikiprov:559734generation
+    wikiprov:activity "comment559734"^^xsd:string ;
+    wikiprov:comment ""^^xsd:string ;
+    wikiprov:entity "559734"^^xsd:string ;
+    wikiprov:id "559734generation"^^xsd:string ;
+    wikiprov:relationshipName "559734generation"^^xsd:string ;
+    wikiprov:time "2002-09-17T03:11:31Z"^^xsd:string ;
+    a prov:Generation ;
+    prov:activity wikiprov:activity_559734 ;
+    prov:atTime "2002-09-17T03:11:31Z"^^xsd:dateTime .
+
+wikiprov:Mav
+    wikiprov:id "Mav"^^xsd:string ;
+    wikiprov:user_name "Mav"^^xsd:string ;
+    a wikiprov:editor, prov:Agent .
+
+wikiprov:Mav_559734
+    a prov:Attribution ;
+    prov:agent wikiprov:Mav ;
+    evident:normalInfluenceFactor "0.012578616352201255"^^xsd:double .
+
+wikiprov:United_States_National_Forest_559734
+    wikiprov:comment ""^^xsd:string ;
+    wikiprov:id "559734"^^xsd:string ;
+    wikiprov:pageid "42653"^^xsd:string ;
+    wikiprov:parentid "223449"^^xsd:string ;
+    wikiprov:revid "559734"^^xsd:string ;
+    wikiprov:size "1116"^^xsd:string ;
+    wikiprov:time "2002-09-17T03:11:31Z"^^xsd:string ;
+    wikiprov:title "United_States_National_Forest"^^xsd:string ;
+    a wikiprov:article, prov:Entity ;
+    prov:qualifiedAttribution wikiprov:Mav_559734 ;
+    prov:qualifiedGeneration wikiprov:559734generation ;
+    prov:qualifiedRevision wikiprov:United_States_National_Forest_559734_223449 .
+
+wikiprov:United_States_National_Forest_559734_223449
+    wikiprov:agent "Mav"^^xsd:string ;
+    wikiprov:changed 2 ;
+    wikiprov:common 157 ;
+    wikiprov:deleted 0 ;
+    wikiprov:entity1 "223449"^^xsd:string ;
+    wikiprov:entity2 "559734"^^xsd:string ;
+    wikiprov:id "United_States_National_Forest_559734_223449"^^xsd:string ;
+    wikiprov:parentid "223449"^^xsd:string ;
+    wikiprov:relationshipName "United_States_National_Forest_559734_223449"^^xsd:string ;
+    wikiprov:revid "559734"^^xsd:string ;
+    wikiprov:words 159 ;
+    a prov:Revision ;
+    prov:entity wikiprov:United_States_National_Forest_223449 ;
+    prov:hadActivity wikiprov:activity_559734 ;
+    prov:hadGeneration wikiprov:559734generation ;
+    evident:normalInfluenceFactor "0.9874213836477987"^^xsd:double .
+
+wikiprov:activity_559734
+    wikiprov:comment ""^^xsd:string ;
+    wikiprov:endtime "2002-09-17T03:11:31Z"^^xsd:string ;
+    wikiprov:id "comment559734"^^xsd:string ;
+    wikiprov:revid "559734"^^xsd:string ;
+    wikiprov:starttime "null"^^xsd:string ;
+    a prov:Activity, "edit"^^xsd:string ;
+    prov:endedAtTime "2002-09-17T03:11:31Z"^^xsd:dateTime ;
+    prov:qualifiedAssociation wikiprov:comment559734Mav .
+
+wikiprov:comment559734Mav
+    wikiprov:activity "comment559734"^^xsd:string ;
+    wikiprov:agent "Mav"^^xsd:string ;
+    wikiprov:id "comment559734Mav"^^xsd:string ;
+    wikiprov:publicationpolicy "null"^^xsd:string ;
+    wikiprov:relationshipName "comment559734Mav"^^xsd:string ;
+    wikiprov:user_name "Mav"^^xsd:string ;
+    a prov:Association ;
+    prov:agent wikiprov:Mav .

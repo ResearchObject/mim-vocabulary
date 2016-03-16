@@ -1,0 +1,769 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : http://www.w3.org/2002/07/owl#> .
+@prefix xml: http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema#> .
+@prefix gaqmetric:  <file:/Users/matthewgamble/Dropbox/PhD/Code/bayes/UnbBayes/gaqmetric.owl#>.
+@prefix pr-owl2: http://www.pr-owl.org/pr-owl2.owl# .
+@prefix evident: <http://purl.org/net/evident#> .
+
+<file:/Users/matthewgamble/Dropbox/PhD/Code/bayes/UnbBayes/gaqmetric.owl>
+    a :Ontology ;
+    :imports <http://www.pr-owl.org/pr-owl2.owl> .
+
+gaqmetric:CX1
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_CX1 ;
+    pr-owl2:isContextNodeIn gaqmetric:Domain_MFrag.productGAQ ;
+    a pr-owl2:ContextNode, :NamedIndividual ;
+    rdfs:comment "CX1"^^xsd:string .
+
+gaqmetric:CX1_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_CX1 ;
+    pr-owl2:typeOfArgument gaqmetric:productGAQ.a ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:CX1_2
+    pr-owl2:hasArgumentNumber 2 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_CX1 ;
+    pr-owl2:typeOfArgument pr-owl2:CX1_2_inner ;
+    a pr-owl2:MExpressionArgument, :NamedIndividual .
+
+gaqmetric:CX1_2_inner_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf pr-owl2:CX1_2_inner ;
+    pr-owl2:typeOfArgument gaqmetric:productGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:CX2
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_CX2 ;
+    pr-owl2:isContextNodeIn gaqmetric:Domain_MFrag.meanGAQ ;
+    a pr-owl2:ContextNode, :NamedIndividual ;
+    rdfs:comment "CX2"^^xsd:string .
+
+gaqmetric:CX2_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_CX2 ;
+    pr-owl2:typeOfArgument gaqmetric:meanGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:CX2_2
+    pr-owl2:hasArgumentNumber 2 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_CX2 ;
+    pr-owl2:typeOfArgument pr-owl2:CX2_2_inner ;
+    a pr-owl2:MExpressionArgument, :NamedIndividual .
+
+gaqmetric:CX2_2_inner_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf pr-owl2:CX2_2_inner ;
+    pr-owl2:typeOfArgument gaqmetric:meanGAQ.s ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:CX3
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_CX3 ;
+    pr-owl2:isContextNodeIn gaqmetric:Domain_MFrag.groupGAQ ;
+    a pr-owl2:ContextNode, :NamedIndividual ;
+    rdfs:comment "CX3"^^xsd:string .
+
+gaqmetric:CX3_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_CX3 ;
+    pr-owl2:typeOfArgument gaqmetric:groupGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:CX3_2
+    pr-owl2:hasArgumentNumber 2 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_CX3 ;
+    pr-owl2:typeOfArgument pr-owl2:CX3_2_inner ;
+    a pr-owl2:MExpressionArgument, :NamedIndividual .
+
+gaqmetric:CX3_2_inner_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf pr-owl2:CX3_2_inner ;
+    pr-owl2:typeOfArgument gaqmetric:groupGAQ.s ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:Defined
+    a :NamedIndividual, :Thing .
+
+gaqmetric:Domain_MFrag.GAQScore_MFrag
+    pr-owl2:hasOrdinaryVariable gaqmetric:GAQScore_MFrag.a ;
+    pr-owl2:hasResidentNode gaqmetric:Domain_Res.ECR,
+                            gaqmetric:Domain_Res.GAQScore,
+                            gaqmetric:Domain_Res.depth,
+                            gaqmetric:Domain_Res.process ;
+    pr-owl2:isMFragOf gaqmetric:MEBN ;
+    a pr-owl2:DomainMFrag, :NamedIndividual ;
+    rdfs:comment "The GAQ score MFrag"^^xsd:string .
+
+gaqmetric:Domain_MFrag.groupGAQ
+    pr-owl2:hasContextNode gaqmetric:CX3 ;
+    pr-owl2:hasInputNode gaqmetric:IX4 ;
+    pr-owl2:hasOrdinaryVariable gaqmetric:groupGAQ.p, gaqmetric:groupGAQ.s ;
+    pr-owl2:hasResidentNode gaqmetric:Domain_Res.groupGAQ, gaqmetric:Domain_Res.group_contains ;
+    pr-owl2:isMFragOf gaqmetric:MEBN ;
+    a pr-owl2:DomainMFrag, :NamedIndividual .
+
+gaqmetric:Domain_MFrag.meanGAQ
+    pr-owl2:hasContextNode gaqmetric:CX2 ;
+    pr-owl2:hasInputNode gaqmetric:IX2 ;
+    pr-owl2:hasOrdinaryVariable gaqmetric:meanGAQ.p, gaqmetric:meanGAQ.s ;
+    pr-owl2:hasResidentNode gaqmetric:Domain_Res.contains, gaqmetric:Domain_Res.meanGAQ ;
+    pr-owl2:isMFragOf gaqmetric:MEBN ;
+    a pr-owl2:DomainMFrag, :NamedIndividual ;
+    rdfs:comment ""^^xsd:string .
+
+gaqmetric:Domain_MFrag.productGAQ
+    pr-owl2:hasContextNode gaqmetric:CX1 ;
+    pr-owl2:hasInputNode gaqmetric:IX1 ;
+    pr-owl2:hasOrdinaryVariable gaqmetric:productGAQ.a, gaqmetric:productGAQ.p ;
+    pr-owl2:hasResidentNode gaqmetric:Domain_Res.go_annotation, gaqmetric:Domain_Res.productGAQ ;
+    pr-owl2:isMFragOf gaqmetric:MEBN ;
+    a pr-owl2:DomainMFrag, :NamedIndividual ;
+    rdfs:comment ""^^xsd:string .
+
+gaqmetric:Domain_Res.ECR
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_ECR ;
+    pr-owl2:hasParent gaqmetric:Domain_Res.process ;
+    pr-owl2:hasProbabilityDistribution pr-owl2:ECR_Table ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.GAQScore_MFrag ;
+    a pr-owl2:ContinuousResidentNode, :NamedIndividual ;
+    rdfs:comment "Continuous resident for ECR"^^xsd:string .
+
+gaqmetric:Domain_Res.GAQScore
+    pr-owl2:hasInputInstance gaqmetric:IX1 ;
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_GAQScore ;
+    pr-owl2:hasParent gaqmetric:Domain_Res.ECR, gaqmetric:Domain_Res.depth ;
+    pr-owl2:hasProbabilityDistribution pr-owl2:GAQScore_Table ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.GAQScore_MFrag ;
+    a pr-owl2:ContinuousResidentNode, :NamedIndividual ;
+    rdfs:comment "Continuous resident node0"^^xsd:string .
+
+gaqmetric:Domain_Res.contains
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_contains ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.meanGAQ ;
+    a pr-owl2:DomainResidentNode, :NamedIndividual ;
+    rdfs:comment "RX10"^^xsd:string .
+
+gaqmetric:Domain_Res.depth
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_depth ;
+    pr-owl2:hasProbabilityDistribution pr-owl2:depth_Table ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.GAQScore_MFrag ;
+    a pr-owl2:ContinuousResidentNode, :NamedIndividual ;
+    rdfs:comment "Continuous resident for depth"^^xsd:string .
+
+gaqmetric:Domain_Res.go_annotation
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_go_annotation ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.productGAQ ;
+    a pr-owl2:DomainResidentNode, :NamedIndividual ;
+    rdfs:comment ""^^xsd:string .
+
+gaqmetric:Domain_Res.groupGAQ
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_groupGAQ ;
+    pr-owl2:hasParent gaqmetric:IX4 ;
+    pr-owl2:hasProbabilityDistribution pr-owl2:groupGAQ_Table ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.groupGAQ ;
+    a pr-owl2:ContinuousResidentNode, :NamedIndividual ;
+    rdfs:comment "Continuous resident node3"^^xsd:string .
+
+gaqmetric:Domain_Res.group_contains
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_group_contains ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.groupGAQ ;
+    a pr-owl2:DomainResidentNode, :NamedIndividual ;
+    rdfs:comment "RX12"^^xsd:string .
+
+gaqmetric:Domain_Res.meanGAQ
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_meanGAQ ;
+    pr-owl2:hasParent gaqmetric:IX2 ;
+    pr-owl2:hasProbabilityDistribution pr-owl2:meanGAQ_Table ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.meanGAQ ;
+    a pr-owl2:ContinuousResidentNode, :NamedIndividual ;
+    rdfs:comment "Continuous resident node2"^^xsd:string .
+
+gaqmetric:Domain_Res.process
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_process ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.GAQScore_MFrag ;
+    a pr-owl2:DomainResidentNode, :NamedIndividual ;
+    rdfs:comment "RX4"^^xsd:string .
+
+gaqmetric:Domain_Res.productGAQ
+    pr-owl2:hasInputInstance gaqmetric:IX2, gaqmetric:IX4 ;
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_productGAQ ;
+    pr-owl2:hasParent gaqmetric:IX1 ;
+    pr-owl2:hasProbabilityDistribution pr-owl2:productGAQ_Table ;
+    pr-owl2:isResidentNodeIn gaqmetric:Domain_MFrag.productGAQ ;
+    a pr-owl2:ContinuousResidentNode, :NamedIndividual ;
+    rdfs:comment "Continuous resident node0"^^xsd:string .
+
+gaqmetric:ECR_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_ECR ;
+    pr-owl2:typeOfArgument gaqmetric:GAQScore_MFrag.a ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:EXPe
+    a :NamedIndividual, :Thing .
+
+gaqmetric:GAQScore_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_GAQScore ;
+    pr-owl2:typeOfArgument gaqmetric:GAQScore_MFrag.a ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:GAQScore_MFrag.a
+    pr-owl2:isSubstitutedBy "http://purl.uniprot.org/core#Protein"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:ECR_1, gaqmetric:GAQScore_1, gaqmetric:depth_1, gaqmetric:process_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX1"^^xsd:string .
+
+gaqmetric:IBA
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IBD
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IC
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IDA
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IEA
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IEP
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IGC
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IGI
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IKR
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IMP
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IMR
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IPI
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IRD
+    a :NamedIndividual, :Thing .
+
+gaqmetric:ISA
+    a :NamedIndividual, :Thing .
+
+gaqmetric:ISM
+    a :NamedIndividual, :Thing .
+
+gaqmetric:ISO
+    a :NamedIndividual, :Thing .
+
+gaqmetric:ISS
+    a :NamedIndividual, :Thing .
+
+gaqmetric:IX1
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_IX1 ;
+    pr-owl2:isInputNodeIn gaqmetric:Domain_MFrag.productGAQ ;
+    a pr-owl2:GenerativeInputNode, :NamedIndividual ;
+    rdfs:comment "IX1"^^xsd:string .
+
+gaqmetric:IX1_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_IX1 ;
+    pr-owl2:typeOfArgument gaqmetric:productGAQ.a ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:IX2
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_IX2 ;
+    pr-owl2:isInputNodeIn gaqmetric:Domain_MFrag.meanGAQ ;
+    a pr-owl2:GenerativeInputNode, :NamedIndividual ;
+    rdfs:comment "IX2"^^xsd:string .
+
+gaqmetric:IX2_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_IX2 ;
+    pr-owl2:typeOfArgument gaqmetric:meanGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:IX4
+    pr-owl2:hasMExpression gaqmetric:MEXPRESSION_IX4 ;
+    pr-owl2:isInputNodeIn gaqmetric:Domain_MFrag.groupGAQ ;
+    a pr-owl2:GenerativeInputNode, :NamedIndividual ;
+    rdfs:comment "IX4"^^xsd:string .
+
+gaqmetric:IX4_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_IX4 ;
+    pr-owl2:typeOfArgument gaqmetric:groupGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:MEBN
+    pr-owl2:hasMFrag gaqmetric:Domain_MFrag.GAQScore_MFrag, gaqmetric:Domain_MFrag.groupGAQ, gaqmetric:Domain_MFrag.meanGAQ, gaqmetric:Domain_MFrag.productGAQ ;
+    a pr-owl2:MTheory, :NamedIndividual ;
+    rdfs:comment ""^^xsd:string .
+
+gaqmetric:MEXPRESSION_CX1
+    pr-owl2:hasArgument gaqmetric:CX1_1, gaqmetric:CX1_2 ;
+    pr-owl2:isMExpressionOf gaqmetric:CX1 ;
+    pr-owl2:typeOfMExpression pr-owl2:equalTo ;
+    a pr-owl2:BooleanMExpression, pr-owl2:MExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_CX2
+    pr-owl2:hasArgument gaqmetric:CX2_1, gaqmetric:CX2_2 ;
+    pr-owl2:isMExpressionOf gaqmetric:CX2 ;
+    pr-owl2:typeOfMExpression pr-owl2:equalTo ;
+    a pr-owl2:BooleanMExpression, pr-owl2:MExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_CX3
+    pr-owl2:hasArgument gaqmetric:CX3_1, gaqmetric:CX3_2 ;
+    pr-owl2:isMExpressionOf gaqmetric:CX3 ;
+    pr-owl2:typeOfMExpression pr-owl2:equalTo ;
+    a pr-owl2:BooleanMExpression, pr-owl2:MExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_ECR
+    pr-owl2:hasArgument gaqmetric:ECR_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.ECR ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_ECR ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_GAQScore
+    pr-owl2:hasArgument gaqmetric:GAQScore_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.GAQScore ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_GAQScore ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_IX1
+    pr-owl2:hasArgument gaqmetric:IX1_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:IX1 ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_GAQScore ;
+    a pr-owl2:MExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_IX2
+    pr-owl2:hasArgument gaqmetric:IX2_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:IX2 ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_productGAQ ;
+    a pr-owl2:MExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_IX4
+    pr-owl2:hasArgument gaqmetric:IX4_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:IX4 ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_productGAQ ;
+    a pr-owl2:MExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_contains
+    pr-owl2:hasArgument gaqmetric:contains_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.contains ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_contains ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_depth
+    pr-owl2:hasArgument gaqmetric:depth_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.depth ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_depth ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_go_annotation
+    pr-owl2:hasArgument gaqmetric:go_annotation_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.go_annotation ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_go_annotation ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_groupGAQ
+    pr-owl2:hasArgument gaqmetric:groupGAQ_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.groupGAQ ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_groupGAQ ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_group_contains
+    pr-owl2:hasArgument gaqmetric:group_contains_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.group_contains ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_group_contains ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_meanGAQ
+    pr-owl2:hasArgument gaqmetric:meanGAQ_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.meanGAQ ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_meanGAQ ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_process
+    pr-owl2:hasArgument gaqmetric:process_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.process ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_process ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:MEXPRESSION_productGAQ
+    pr-owl2:hasArgument gaqmetric:productGAQ_1 ;
+    pr-owl2:isMExpressionOf gaqmetric:Domain_Res.productGAQ ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_productGAQ ;
+    a pr-owl2:SimpleMExpression, :NamedIndividual .
+
+gaqmetric:NAS
+    a :NamedIndividual, :Thing .
+
+gaqmetric:ND
+    a :NamedIndividual, :Thing .
+
+gaqmetric:NR
+    a :NamedIndividual, :Thing .
+
+gaqmetric:Number
+    a :Class ;
+    rdfs:subClassOf :Thing .
+
+gaqmetric:RCA
+    a :NamedIndividual, :Thing .
+
+gaqmetric:RV_ECR
+    pr-owl2:hasArgument gaqmetric:RV_ECR_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Number"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_ECR ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_ECR_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_ECR ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_GAQScore
+    pr-owl2:hasArgument gaqmetric:RV_GAQScore_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Number"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_GAQScore, gaqmetric:MEXPRESSION_IX1 ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_GAQScore_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_GAQScore ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_contains
+    pr-owl2:definesUncertaintyOf "http://sierra-nevada.cs.manchester.ac.uk/goa#group_contains"^^xsd:anyURI ;
+    pr-owl2:hasArgument gaqmetric:RV_contains_1 ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_contains, pr-owl2:CX2_2_inner ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_contains_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_contains ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_depth
+    pr-owl2:definesUncertaintyOf
+            "http://sierra-nevada.cs.manchester.ac.uk/goa#go-depth"^^xsd:anyURI ;
+    pr-owl2:hasArgument gaqmetric:RV_depth_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Number"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_depth ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_depth_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_depth ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_go_annotation
+    pr-owl2:definesUncertaintyOf "http://bio2rdf.org/goa_vocabulary#go-annotation"^^xsd:anyURI ;
+    pr-owl2:hasArgument gaqmetric:RV_go_annotation_1 ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_go_annotation, pr-owl2:CX1_2_inner ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_go_annotation_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_go_annotation ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_groupGAQ
+    pr-owl2:hasArgument gaqmetric:RV_groupGAQ_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Number"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_groupGAQ ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_groupGAQ_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_groupGAQ ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_group_contains
+    pr-owl2:definesUncertaintyOf "http://sierra-nevada.cs.manchester.ac.uk/goa#group_contains"^^xsd:anyURI ;
+    pr-owl2:hasArgument gaqmetric:RV_group_contains_1 ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_group_contains, pr-owl2:CX3_2_inner ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_group_contains_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_group_contains ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_meanGAQ
+    pr-owl2:hasArgument gaqmetric:RV_meanGAQ_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Number"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_meanGAQ ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_meanGAQ_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_meanGAQ ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_process
+    pr-owl2:definesUncertaintyOf "http://sierra-nevada.cs.manchester.ac.uk/goa#ec_label"^^xsd:anyURI ;
+    pr-owl2:hasArgument gaqmetric:RV_process_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Defined"^^xsd:anyURI, "gaqmetric:EXPe"^^xsd:anyURI, "gaqmetric:IBA"^^xsd:anyURI, "gaqmetric:IBD"^^xsd:anyURI, "gaqmetric:IC"^^xsd:anyURI, "gaqmetric:IDA"^^xsd:anyURI, "gaqmetric:IEA"^^xsd:anyURI, "gaqmetric:IEP"^^xsd:anyURI, "gaqmetric:IGC"^^xsd:anyURI, "gaqmetric:IGI"^^xsd:anyURI, "gaqmetric:IKR"^^xsd:anyURI, "gaqmetric:IMP"^^xsd:anyURI, "gaqmetric:IMR"^^xsd:anyURI, "gaqmetric:IPI"^^xsd:anyURI, "gaqmetric:IRD"^^xsd:anyURI, "gaqmetric:ISA"^^xsd:anyURI, "gaqmetric:ISM"^^xsd:anyURI, "gaqmetric:ISO"^^xsd:anyURI, "gaqmetric:ISS"^^xsd:anyURI, "gaqmetric:NAS"^^xsd:anyURI, "gaqmetric:ND"^^xsd:anyURI, "gaqmetric:NR"^^xsd:anyURI, "gaqmetric:RCA"^^xsd:anyURI, "gaqmetric:TAS"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_process ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_process_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_process ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:RV_productGAQ
+    evident:definesMetricFor
+            "http://purl.uniprot.org/core/Protein"^^xsd:anyURI ;
+    pr-owl2:hasArgument gaqmetric:RV_productGAQ_1 ;
+    pr-owl2:hasPossibleValues "gaqmetric:Number"^^xsd:anyURI ;
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_IX2, gaqmetric:MEXPRESSION_IX4, gaqmetric:MEXPRESSION_productGAQ ;
+    a pr-owl2:RandomVariable, :NamedIndividual .
+
+gaqmetric:RV_productGAQ_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:RV_productGAQ ;
+    a pr-owl2:MappingArgument, :NamedIndividual .
+
+gaqmetric:TAS
+    a :NamedIndividual, :Thing .
+
+gaqmetric:contains_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_contains ;
+    pr-owl2:typeOfArgument gaqmetric:meanGAQ.s ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:depth_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_depth ;
+    pr-owl2:typeOfArgument gaqmetric:GAQScore_MFrag.a ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:go_annotation_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_go_annotation ;
+    pr-owl2:typeOfArgument gaqmetric:productGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:groupGAQ.p
+    pr-owl2:isSubstitutedBy "http://purl.uniprot.org/core#Protein"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX3_1, gaqmetric:IX4_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX1"^^xsd:string .
+
+gaqmetric:groupGAQ.s
+    pr-owl2:isSubstitutedBy "http://sierra-nevada.cs.manchester.ac.uk/goa#Group"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX3_2_inner_1, gaqmetric:groupGAQ_1, gaqmetric:group_contains_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX2"^^xsd:string .
+
+gaqmetric:groupGAQ_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_groupGAQ ;
+    pr-owl2:typeOfArgument gaqmetric:groupGAQ.s ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:group_contains_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_group_contains ;
+    pr-owl2:typeOfArgument gaqmetric:groupGAQ.s ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:meanGAQ.p
+    pr-owl2:isSubstitutedBy "http://purl.uniprot.org/core#Protein"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX2_1, gaqmetric:IX2_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX1"^^xsd:string .
+
+gaqmetric:meanGAQ.s
+    pr-owl2:isSubstitutedBy "http://sierra-nevada.cs.manchester.ac.uk/goa#Group"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX2_2_inner_1, gaqmetric:contains_1, gaqmetric:meanGAQ_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX2"^^xsd:string .
+
+gaqmetric:meanGAQ_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_meanGAQ ;
+    pr-owl2:typeOfArgument gaqmetric:meanGAQ.s ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:process_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_process ;
+    pr-owl2:typeOfArgument gaqmetric:GAQScore_MFrag.a ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+gaqmetric:productGAQ.a
+    pr-owl2:isSubstitutedBy "http://bio2rdf.org/goa_vocabulary#GO-Annotation"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX1_1, gaqmetric:IX1_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX2"^^xsd:string .
+
+gaqmetric:productGAQ.p
+    pr-owl2:isSubstitutedBy "http://purl.uniprot.org/core#Protein"^^xsd:anyURI ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX1_2_inner_1, gaqmetric:go_annotation_1, gaqmetric:productGAQ_1 ;
+    a pr-owl2:OrdinaryVariable, :NamedIndividual ;
+    rdfs:comment "OX1"^^xsd:string .
+
+gaqmetric:productGAQ_1
+    pr-owl2:hasArgumentNumber 1 ;
+    pr-owl2:isArgumentOf gaqmetric:MEXPRESSION_productGAQ ;
+    pr-owl2:typeOfArgument gaqmetric:productGAQ.p ;
+    a pr-owl2:OrdinaryVariableArgument, :NamedIndividual .
+
+pr-owl2:CX1_2_inner
+    pr-owl2:hasArgument gaqmetric:CX1_2_inner_1 ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX1_2 ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_go_annotation ;
+    a pr-owl2:MExpression, :NamedIndividual .
+
+pr-owl2:CX2_2_inner
+    pr-owl2:hasArgument gaqmetric:CX2_2_inner_1 ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX2_2 ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_contains ;
+    a pr-owl2:MExpression, :NamedIndividual .
+
+pr-owl2:CX3_2_inner
+    pr-owl2:hasArgument gaqmetric:CX3_2_inner_1 ;
+    pr-owl2:isTypeOfArgumentIn gaqmetric:CX3_2 ;
+    pr-owl2:typeOfMExpression gaqmetric:RV_group_contains ;
+    a pr-owl2:MExpression, :NamedIndividual .
+
+pr-owl2:ContinuousResidentNode
+    a :Class .
+
+pr-owl2:ECR_Table
+    pr-owl2:hasDeclaration """if any a have ( process = EXPe ) [
+NormalDist(5,0)
+] else
+if any a have ( process = IBA ) [
+NormalDist(2,0)
+] else
+if any a have ( process = IBD ) [
+NormalDist(2,0)
+] else
+if any a have ( process = IC ) [
+NormalDist(4,0)
+] else
+if any a have ( process = IDA ) [
+NormalDist(5,0)
+] else
+if any a have ( process = IEA ) [
+NormalDist(2,0)
+] else
+if any a have ( process = IEP ) [
+NormalDist(3,0)
+] else
+if any a have ( process = IGC ) [
+NormalDist(3,0)
+] else
+if any a have ( process = IGI ) [
+NormalDist(5,0)
+] else
+if any a have ( process = IKR ) [
+NormalDist(2,0)
+] else
+if any a have ( process = IMP ) [
+NormalDist(5,0)
+] else
+if any a have ( process = IMR ) [
+NormalDist(2,0)
+] else
+if any a have ( process = IPI ) [
+NormalDist(5,0)
+] else
+if any a have ( process = IRD ) [
+NormalDist(2,0)
+] else
+if any a have ( process = ISA ) [
+NormalDist(2,0)
+] else
+if any a have ( process = ISM ) [
+NormalDist(2,0)
+] else
+if any a have ( process = ISO ) [
+NormalDist(3,0)
+] else
+if any a have ( process = ISS ) [
+NormalDist(2,0)
+]  else
+if any a have ( process = NAS ) [
+NormalDist(2,0)
+] else
+if any a have ( process = ND ) [
+NormalDist(0,0)
+] else
+if any a have ( process = NR ) [
+NormalDist(1,0)
+] else
+if any a have ( process = RCA ) [
+NormalDist(3,0)
+] else
+if any a have ( process = TAS ) [
+NormalDist(4,0)
+]
+else[
+NormalDist(3,0)
+]
+"""^^xsd:string ;
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:GAQScore_Table
+    pr-owl2:hasDeclaration """[
+(ECR * depth) * NormalDist(1,0.1)
+]
+"""^^xsd:string ;
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:contains_Table
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:depth_Table
+    pr-owl2:hasDeclaration """[
+NormalDist(6.7,2.1)
+]"""^^xsd:string ;
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:equalTo
+    pr-owl2:isTypeOfMExpression gaqmetric:MEXPRESSION_CX1, gaqmetric:MEXPRESSION_CX2, gaqmetric:MEXPRESSION_CX3 .
+
+pr-owl2:go_annotation_Table
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:groupGAQ_Table
+    pr-owl2:hasDeclaration """[
+Sum( productGAQ ) * NormalDist(1,0)
+]"""^^xsd:string ;
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:group_contains_Table
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:hasInputInstance
+    a :ObjectProperty .
+
+pr-owl2:meanGAQ_Table
+    pr-owl2:hasDeclaration """[
+Mean( productGAQ ) * NormalDist(1,0)
+]"""^^xsd:string ;
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:process_Table
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
+
+pr-owl2:productGAQ_Table
+    pr-owl2:hasDeclaration """[
+Sum(GAQScore) * NormalDist(1,0)
+]"""^^xsd:string ;
+    a pr-owl2:DeclarativeDistribution, :NamedIndividual .
