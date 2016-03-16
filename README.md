@@ -9,7 +9,7 @@ or a [pull request](https://github.com/ResearchObject/mim-vocabulary/pulls).
 
 For more information, see:
 
-* Paper: [MIM: A Minimum Information Model vocabulary and framework for Scientific Linked Data](http://dx.doi.org/10.1109/eScience.2012.6404489) <br> [doi:http://dx.doi.org/10.1109/eScience.2012.6404489](http://dx.doi.org/10.1109/eScience.2012.6404489) ([preprint](http://www.esciencelab.org.uk/publications/preprints/2012/gamble-mim-10.1109_eScience.2012.6404489.pdf))
+* Paper: [MIM: A Minimum Information Model vocabulary and framework for Scientific Linked Data](http://www.esciencelab.org.uk/publications/preprints/2012/gamble-mim-10.1109_eScience.2012.6404489.pdf) <br> [doi:http://dx.doi.org/10.1109/eScience.2012.6404489](http://dx.doi.org/10.1109/eScience.2012.6404489) ([preprint](http://www.esciencelab.org.uk/publications/preprints/2012/gamble-mim-10.1109_eScience.2012.6404489.pdf))
 * Thesis: [Modelling and Computing the Quality of Scientific Information on the Web of Data](https://www.escholar.manchester.ac.uk/uk-ac-man-scw:224381) 
 * Presentation: [MIM:  A Minimum Information ModelVocabulary and Framework for Scientific Linked Data](http://dev.mygrid.org.uk/wiki/download/attachments/14418927/MIM-Complete.pdf)
 * [MIM validation web service](https://github.com/matthewgamble/mim-ws)
