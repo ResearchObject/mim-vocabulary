@@ -5,7 +5,7 @@ This is an **archive** of the Minimum Information Model vocabulary, made by
 
 It is **no longer maintained** - but feel free to raise an
 [issue](https://github.com/ResearchObject/mim-vocabulary/issues)
-or a [pull request](https://github.com/ResearchObject/mim-vocabulary/pulls)
+or a [pull request](https://github.com/ResearchObject/mim-vocabulary/pulls).
 
 For more information, see:
 
