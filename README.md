@@ -1,6 +1,6 @@
 # Minimum Information Model (MIM) vocabularies
 
-<img src="mim.jpeg" width="150" height="150">
+<img src="mim-ticks.jpeg" height="150">
 
 This is an **archive** of the Minimum Information Model vocabulary, made by 
 [Matthew Gamble](http://orcid.org/0000-0003-4913-1485).
